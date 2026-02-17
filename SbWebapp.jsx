@@ -280,7 +280,7 @@ function Hero({ setActive }) {
             fontWeight: 700, fontFamily: "'Tajawal', sans-serif",
             letterSpacing: 1
           }}>
-            ✦ مع الباشا كلّه أرباح ✦
+            ✦ الباشا معكم.. فلا خوف عليكم ✦
           </p>
         </FadeIn>
         <FadeIn delay={0.3}>
@@ -768,3 +768,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
