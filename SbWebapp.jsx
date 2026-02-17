@@ -295,7 +295,7 @@ function Hero({ setActive }) {
             fontSize: 18, color: "rgba(255,255,255,0.65)", margin: "20px auto 0",
             maxWidth: 550, lineHeight: 1.8
           }}>
-            مؤسس نظام <strong style={{ color: "#d4af37" }}>SB Model</strong> ومشروع <strong style={{ color: "#d4af37" }}>X</strong>
+            اح مؤسسين نظام <strong style={{ color: "#d4af37" }}>SB Model</strong> ومشروع <strong style={{ color: "#d4af37" }}>X</strong>
             <br />مستشار وخبير في أسواق المال
             <br />تداول • استثمار • ذكاء اصطناعي • دخل سلبي
           </p>
@@ -775,6 +775,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
 
 
 
