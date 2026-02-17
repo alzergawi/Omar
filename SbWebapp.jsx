@@ -408,7 +408,7 @@ function Packages() {
       id: "connect",
       name: "باقة Connect",
       // ══ ضع مسار صورة باقة Connect هنا ══
-      image: "/images/connect.jpg",
+      image: "/images/connect.JPEG",
       price: "349",
       days: "30",
       color: "#4a90d9",
@@ -419,7 +419,7 @@ function Packages() {
       id: "create",
       name: "باقة Create",
       // ══ ضع مسار صورة باقة Create هنا ══
-      image: "/images/create.jpg",
+      image: "/images/create.JPEG",
       price: "999",
       days: "60",
       color: "#2dd4a0",
@@ -430,7 +430,7 @@ function Packages() {
       id: "complete",
       name: "باقة Complete",
       // ══ ضع مسار صورة باقة Complete هنا ══
-      image: "/images/complete.jpg",
+      image: "/images/complete.JPEG",
       price: "1,699",
       days: "90",
       color: "#a78bfa",
