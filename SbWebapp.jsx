@@ -254,7 +254,7 @@ function Nav({ active, setActive }) {
 }
 
 // ═══════════════════════════════════
-// Hero Section
+// Hero Section (تعديل حرف الشين)
 // ═══════════════════════════════════
 function Hero({ setActive }) {
   return (
@@ -265,11 +265,18 @@ function Hero({ setActive }) {
         </FadeIn>
         <FadeIn delay={0.1}>
           <h1 style={{
-            fontSize: "clamp(36px, 7vw, 64px)", fontWeight: 900, lineHeight: 1.15,
-            margin: "24px 0 0", fontFamily: "'Tajawal', sans-serif",
+            fontSize: "clamp(36px, 7vw, 64px)", 
+            fontWeight: 800, // تقليل السماكة قليلاً ليصبح الحرف أوضح
+            lineHeight: 1.5, // ✅ زيادة ارتفاع السطر لمنع قص النقاط
+            paddingBottom: 10, // ✅ إضافة مسافة لمنع قص الحروف من الأسفل أو الأعلى
+            paddingTop: 10,    // ✅ مسافة للأعلى للنقاط
+            margin: "14px 0 0", 
+            fontFamily: "'Tajawal', sans-serif",
             background: "linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",
-            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            backgroundSize: "200% 200%", animation: "shimmer 4s ease infinite"
+            WebkitBackgroundClip: "text", 
+            WebkitTextFillColor: "transparent",
+            backgroundSize: "200% 200%", 
+            animation: "shimmer 4s ease infinite"
           }}>
             كوتش عمر الباشا
           </h1>
@@ -278,7 +285,7 @@ function Hero({ setActive }) {
           <p style={{
             fontSize: 22, color: "#d4af37", margin: "16px 0 0",
             fontWeight: 700, fontFamily: "'Tajawal', sans-serif",
-            letterSpacing: 1
+            letterSpacing: 0 // الأحرف العربية لا تحتاج تباعد كبير
           }}>
             ✦ الباشا معكم.. فلا خوف عليكم ✦
           </p>
@@ -768,6 +775,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
 
 
 
