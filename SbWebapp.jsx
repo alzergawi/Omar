@@ -683,7 +683,7 @@ function Footer() {
       textAlign: "center"
     }}>
       <div style={{ fontSize: 24, marginBottom: 8 }}>👑</div>
-      <div style={{ color: "#d4af37", fontSize: 18, fontWeight: 700, fontFamily: "'Tajawal', sans-serif" }}>مع الباشا كلّه أرباح</div>
+      <div style={{ color: "#d4af37", fontSize: 18, fontWeight: 700, fontFamily: "'Tajawal', sans-serif" }}>الباشا معكم.. فلا خوف عليكم</div>
       <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, marginTop: 12 }}>© 2026 كوتش عمر رباح الباشا — جميع الحقوق محفوظة</div>
     </footer>
   );
@@ -768,4 +768,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
 
