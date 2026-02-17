@@ -317,6 +317,33 @@ function Hero({ setActive }) {
             <Btn outline onClick={() => setActive("projectx")}>🚀 استكشف مشروع X</Btn>
           </div>
         </FadeIn>
+
+        {/* ═══ فيديو تعريفي — كوتش عمر ═══ */}
+        <FadeIn delay={0.6}>
+          <div style={{
+            marginTop: 48, borderRadius: 20, overflow: "hidden",
+            border: "1px solid rgba(212,175,55,0.3)",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+            background: "rgba(0,0,0,0.4)",
+            maxWidth: 700, marginInline: "auto"
+          }}>
+            <div style={{ textAlign: "center", padding: "16px 16px 8px" }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: "#d4af37" }}>🎬 تعرّف على كوتش عمر</span>
+            </div>
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster=""
+              style={{ width: "100%", display: "block", borderRadius: "0 0 20px 20px" }}
+            >
+              {/* ══ ضع رابط فيديو كوتش عمر هنا ══ */}
+              <source src="/videos/coach-omar-intro.mp4" type="video/mp4" />
+              متصفحك لا يدعم عرض الفيديو
+            </video>
+          </div>
+        </FadeIn>
+
       </div>
     </section>
   );
@@ -374,100 +401,90 @@ function ProjectX({ setActive }) {
 // Packages Section
 // ═══════════════════════════════════
 function Packages() {
-  const [selected, setSelected] = useState(null);
+  const [hoveredPkg, setHoveredPkg] = useState(null);
+
   const pkgs = [
     {
-      id: "lite", name: "LITE Package", tag: "للأفراد الجدد", price: "349", origPrice: "999", days: "30",
-      color: "#4ade80", recommended: false,
-      eTrading: ["2 قنوات توصيات", "تداول مدعوم بالذكاء الاصطناعي", "مؤشرات خاصة", "نظام ذكي لتقييم أدائك وانضباطك"],
-      strategy: "استراتيجية الدخول R1+R2",
-      strategyDetails: ["ملف جاهز لإدارة المخاطر", "خطة تطبيق يومية"],
-      eModel: true,
+      id: "connect",
+      name: "باقة Connect",
+      // ══ ضع مسار صورة باقة Connect هنا ══
+      image: "/images/connect.jpg",
+      price: "349",
+      days: "30",
+      color: "#4a90d9",
+      recommended: false,
+      link: COACH_TELEGRAM,
     },
     {
-      id: "pro", name: "Pro Package", tag: "للمستثمرين المتوسطين", price: "999", origPrice: "2,999", days: "60",
-      color: "#d4af37", recommended: true,
-      eTrading: ["5 قنوات توصيات بالـ AI", "تداول مدعوم بالذكاء الاصطناعي", "مؤشرات خاصة بالـ AI", "تداول لايف يومي مع المحللين", "كورس الحسابات الممولة والربح بالـ AI"],
-      strategy: "🍊 استراتيجية برتقالة الفجر",
-      strategyDetails: ["استراتيجية التداول الذكية", "تعمل على MT5", "تركّز على نقاط الدخول بدقة عالية"],
-      eModel: true,
+      id: "create",
+      name: "باقة Create",
+      // ══ ضع مسار صورة باقة Create هنا ══
+      image: "/images/create.jpg",
+      price: "999",
+      days: "60",
+      color: "#2dd4a0",
+      recommended: false,
+      link: COACH_TELEGRAM,
     },
     {
-      id: "ultra", name: "ULTRA Package", tag: "للمحترفين", price: "1,699", origPrice: "4,999", days: "90",
-      color: "#a78bfa", recommended: false,
-      eTrading: ["12 قناة توصيات بالـ AI", "4 مؤشرات التداول بالـ AI", "تداول لايف يومي مع المحللين", "تداول بالـ AI", "جلسات خاصة لتحليل حسابك وأخطائك", "كورس الحسابات الممولة والربح بالـ AI", "كورس نفسي لبناء عقلية المتداول"],
-      strategy: "⚡ الجيل الجديد من SB MODEL",
-      strategyDetails: ["مستويات SB MODEL بالـ AI", "مستوى SB-Raven", "نقلة نوعية في التحليل الموجي والتداول الذكي"],
-      eModel: true,
+      id: "complete",
+      name: "باقة Complete",
+      // ══ ضع مسار صورة باقة Complete هنا ══
+      image: "/images/complete.jpg",
+      price: "1,699",
+      days: "90",
+      color: "#a78bfa",
+      recommended: true,
+      link: COACH_TELEGRAM,
     },
   ];
 
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="📦" title="الباقات التعليمية" sub="استثمر في مستقبلك المالي — نظام مُجرّب ومبني على نتائج حقيقية" />
+      <SectionTitle icon="📦" title="الباقات التعليمية" sub="استثمر في مستقبلك المالي — اختر الباقة المناسبة لك" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 24, alignItems: "stretch" }}>
         {pkgs.map((p, i) => (
           <FadeIn key={p.id} delay={i * 0.12}>
-            <div style={{ position: "relative", height: "100%" }}>
+            <div
+              style={{ position: "relative", height: "100%" }}
+              onMouseEnter={() => setHoveredPkg(p.id)}
+              onMouseLeave={() => setHoveredPkg(null)}
+            >
               {p.recommended && (
                 <div style={{
                   position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", zIndex: 2,
-                  background: "linear-gradient(135deg, #d4af37, #b8941f)", color: "#0a0a0a",
+                  background: "linear-gradient(135deg, #a78bfa, #7c3aed)", color: "#fff",
                   padding: "6px 24px", borderRadius: 50, fontSize: 13, fontWeight: 800,
                   fontFamily: "'Tajawal', sans-serif", whiteSpace: "nowrap"
-                }}>⭐ يُوصى بها</div>
+                }}>⭐ الأقوى والأشمل</div>
               )}
-              <Card gold={p.recommended} glow={p.recommended} style={{
+              <div style={{
+                borderRadius: 20, overflow: "hidden",
+                border: p.recommended ? `2px solid ${p.color}` : "1px solid rgba(255,255,255,0.1)",
+                transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
+                transform: hoveredPkg === p.id ? "translateY(-8px) scale(1.02)" : "translateY(0) scale(1)",
+                boxShadow: hoveredPkg === p.id
+                  ? `0 20px 60px rgba(${p.recommended ? '167,139,250' : '0,0,0'},0.25)`
+                  : "0 4px 20px rgba(0,0,0,0.2)",
+                background: "rgba(255,255,255,0.03)",
                 height: "100%", display: "flex", flexDirection: "column",
-                border: p.recommended ? "1px solid rgba(212,175,55,0.5)" : "1px solid rgba(255,255,255,0.08)",
               }}>
-                <div style={{ textAlign: "center", marginBottom: 20 }}>
-                  <Badge color={p.color}>{p.tag}</Badge>
-                  <h3 style={{ fontSize: 26, fontWeight: 800, color: p.color, margin: "16px 0 4px", fontFamily: "'Tajawal', sans-serif" }}>{p.name}</h3>
-                  <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "line-through" }}>قيمة المحتوى {p.origPrice}$</div>
-                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 4, marginTop: 8 }}>
-                    <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", fontFamily: "'Tajawal', sans-serif" }}>{p.price}</span>
-                    <span style={{ fontSize: 18, color: "rgba(255,255,255,0.5)" }}>$</span>
-                  </div>
-                  <div style={{ fontSize: 14, color: "rgba(255,255,255,0.4)" }}>{p.days} يوم</div>
-                </div>
-
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 16, marginBottom: 12 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: p.color, marginBottom: 10, letterSpacing: 1 }}>📊 e-Trading</div>
-                  {p.eTrading.map((item, j) => (
-                    <div key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
-                      <span style={{ color: p.color, flexShrink: 0 }}>✅</span>
-                      <span style={{ fontSize: 14, color: "rgba(255,255,255,0.75)" }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 12, marginBottom: 12 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: p.color, marginBottom: 8 }}>{p.strategy}</div>
-                  {p.strategyDetails.map((s, j) => (
-                    <div key={j} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                      <span style={{ color: p.color, flexShrink: 0 }}>•</span>
-                      <span style={{ fontSize: 13, color: "rgba(255,255,255,0.65)" }}>{s}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 12, marginBottom: 20 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: p.color, marginBottom: 8 }}>💰 e-Model (الدخل السلبي)</div>
-                  {["Weekly Commission — عمولات أسبوعية", "Leverage Profit — مضاعفة الأرباح", "Business Asset 24/7 — أصل رقمي", "Fast Payout — سحب سريع"].map((m, j) => (
-                    <div key={j} style={{ display: "flex", gap: 8, marginBottom: 5 }}>
-                      <span style={{ color: p.color, flexShrink: 0, fontSize: 12 }}>💎</span>
-                      <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>{m}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div style={{ marginTop: "auto" }}>
-                  <Btn primary={p.recommended} outline={!p.recommended} full href={COACH_TELEGRAM}>
-                    اشترك الآن — {p.price}$
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  style={{
+                    width: "100%", display: "block",
+                    objectFit: "cover",
+                  }}
+                  loading="lazy"
+                />
+                <div style={{ padding: "20px 24px", marginTop: "auto" }}>
+                  <Btn primary={p.recommended} outline={!p.recommended} full href={p.link}
+                    style={p.recommended ? { background: `linear-gradient(135deg, ${p.color}, #7c3aed)`, color: "#fff" } : { borderColor: `${p.color}88`, color: p.color }}>
+                    🚀 اشترك الآن — {p.price}$
                   </Btn>
                 </div>
-              </Card>
+              </div>
             </div>
           </FadeIn>
         ))}
@@ -531,7 +548,7 @@ function AISection({ setActive }) {
         <Card style={{ textAlign: "center", padding: 32, background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.2)" }}>
           <div style={{ fontSize: 20, fontWeight: 700, color: "#d4af37", marginBottom: 8 }}>📊 عدد القنوات حسب الباقة</div>
           <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", marginTop: 16 }}>
-            {[{ name: "LITE", count: "2", color: "#4ade80" }, { name: "Pro", count: "5", color: "#d4af37" }, { name: "ULTRA", count: "12", color: "#a78bfa" }].map(p => (
+            {[{ name: "Connect", count: "3", color: "#4a90d9" }, { name: "Create", count: "5", color: "#2dd4a0" }, { name: "Complete", count: "12", color: "#a78bfa" }].map(p => (
               <div key={p.name} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 36, fontWeight: 900, color: p.color }}>{p.count}</div>
                 <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>{p.name}</div>
@@ -552,25 +569,73 @@ function AISection({ setActive }) {
 // ═══════════════════════════════════
 function SuccessStories({ setActive }) {
   const stories = [
-    { flag: "🇮🇶", name: "متدرب مرتضى من العراق", text: "بدأ بمبلغ 21$ وخلال 27 يوم وصل إلى 3,000$ وسحب 2 مليون دينار عراقي", highlight: "3,000$ → 21$" },
-    { flag: "🏅", name: "مدرب في مشروع X", text: "قبل ما يدخل معي كان خسران 20,000$ والآن حقق 400,000$ خلال 30 يوم فقط!", highlight: "20K$ → 400K$" },
-    { flag: "🎓", name: "ورشة تدريب مكثف أوف لاين", text: "تجمعات مع المتدربين وأخذ تعليمات وأسرار تساعدهم في مجال التداول والأسواق المالية", highlight: "تدريب حي" },
+    {
+      flag: "🇮🇶",
+      name: "مرتضى من العراق",
+      text: "بدأ بمبلغ 21$ وخلال 27 يوم وصل إلى 3,000$ وسحب 2 مليون دينار عراقي",
+      highlight: "3,000$ ← 21$",
+      // ══ ضع رابط فيديو مرتضى هنا ══
+      video: "/videos/success-murtaza.mp4",
+    },
+    {
+      flag: "🇱🇾",
+      name: "حليمة من ليبيا",
+      text: "مدرّسة وأم لأربعة أطفال، دخلت المجال لتطوّر الواقع المالي لعائلتها. بدأت بـ 100$ وخلال شهر واحد أصبحت 22,000$!",
+      highlight: "22,000$ ← 100$",
+      // ══ ضع رابط فيديو حليمة هنا ══
+      video: "/videos/success-halima.mp4",
+    },
+    {
+      flag: "🏅",
+      name: "مدرب في مشروع X",
+      text: "قبل ما يدخل معي كان خسران 20,000$ والآن حقق 400,000$ خلال 30 يوم فقط!",
+      highlight: "20K$ → 400K$",
+      // ══ ضع رابط فيديو مدرب مشروع X هنا ══
+      video: "/videos/success-projectx-trainer.mp4",
+    },
   ];
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="🏆" title="قصص نجاح متدربيني" sub="آراء المتدربين تحت إشرافي" />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 20 }}>
+      <SectionTitle icon="🏆" title="قصص نجاح متدربيني" sub="شاهد بنفسك — قصص حقيقية من متدربين تحت إشرافي" />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 24 }}>
         {stories.map((s, i) => (
-          <FadeIn key={i} delay={i * 0.1}>
-            <Card gold style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 12 }}>{s.flag}</div>
-              <h4 style={{ fontSize: 18, fontWeight: 700, color: "#d4af37", margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif" }}>{s.name}</h4>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.8, margin: "0 0 16px" }}>{s.text}</p>
+          <FadeIn key={i} delay={i * 0.12}>
+            <Card gold style={{ textAlign: "center", padding: 0, overflow: "hidden" }}>
+              {/* ═══ فيديو قصة النجاح ═══ */}
               <div style={{
-                display: "inline-block", padding: "8px 24px", borderRadius: 50,
-                background: "rgba(212,175,55,0.15)", color: "#d4af37",
-                fontSize: 18, fontWeight: 800, fontFamily: "'Tajawal', sans-serif"
-              }}>{s.highlight}</div>
+                position: "relative", background: "#000",
+                borderBottom: "1px solid rgba(212,175,55,0.2)"
+              }}>
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  style={{ width: "100%", display: "block", aspectRatio: "9/16", maxHeight: 420, objectFit: "cover" }}
+                >
+                  <source src={s.video} type="video/mp4" />
+                  متصفحك لا يدعم عرض الفيديو
+                </video>
+              </div>
+
+              {/* ═══ معلومات القصة ═══ */}
+              <div style={{ padding: "20px 24px 24px" }}>
+                <div style={{ fontSize: 36, marginBottom: 8 }}>{s.flag}</div>
+                <h4 style={{
+                  fontSize: 18, fontWeight: 700, color: "#d4af37",
+                  margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif"
+                }}>{s.name}</h4>
+                <p style={{
+                  fontSize: 14, color: "rgba(255,255,255,0.7)",
+                  lineHeight: 1.8, margin: "0 0 16px"
+                }}>{s.text}</p>
+                <div style={{
+                  display: "inline-block", padding: "10px 28px", borderRadius: 50,
+                  background: "linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.08))",
+                  color: "#d4af37", fontSize: 20, fontWeight: 800,
+                  fontFamily: "'Tajawal', sans-serif",
+                  border: "1px solid rgba(212,175,55,0.3)"
+                }}>{s.highlight}</div>
+              </div>
             </Card>
           </FadeIn>
         ))}
@@ -616,19 +681,19 @@ function Contact() {
       </div>
 
       <FadeIn delay={0.2}>
-        <h3 style={{ textAlign: "center", fontSize: 22, color: "#d4af37", fontWeight: 700, marginBottom: 24, fontFamily: "'Tajawal', sans-serif" }}>
+        <h3 style={{ textAlign: "center", fontSize: 22, color: "#d4af37", fontWeight: 700, marginBottom: 8, fontFamily: "'Tajawal', sans-serif" }}>
           👥 مجتمع الباشا — القنوات والمجموعات
         </h3>
+        <p style={{ textAlign: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>🔒 خاصة بالمشتركين فقط</p>
       </FadeIn>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12 }}>
         {communityLinks.map((ch, i) => (
           <FadeIn key={i} delay={0.3 + i * 0.05}>
-            <a href={ch.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-              <Card style={{ textAlign: "center", padding: "20px 12px" }}>
-                <div style={{ fontSize: 28 }}>{ch.icon}</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 8, fontWeight: 600 }}>{ch.name}</div>
-              </Card>
-            </a>
+            <Card style={{ textAlign: "center", padding: "20px 12px", opacity: 0.7, cursor: "default" }}>
+              <div style={{ fontSize: 28 }}>{ch.icon}</div>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 8, fontWeight: 600 }}>{ch.name}</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 6 }}>🔒 للمشتركين</div>
+            </Card>
           </FadeIn>
         ))}
       </div>
@@ -644,7 +709,7 @@ function FAQ() {
   const faqs = [
     { q: "هل أحتاج خبرة سابقة؟", a: "لا أبداً! باقة LITE تبدأ معك من الصفر." },
     { q: "كم أحتاج رأس مال للبدء؟", a: "يمكنك البدء بـ 100$ للتطبيق، أو استخدام الحسابات الممولة بدون رأس مال." },
-    { q: "ما الفرق بين الباقات الثلاث؟", a: "LITE (349$/30يوم) للمبتدئين، Pro (999$/60يوم) للمتوسطين مع استراتيجية برتقالة الفجر، ULTRA (1,699$/90يوم) الأقوى مع SB-Raven والجيل الجديد من SB Model." },
+    { q: "ما الفرق بين الباقات الثلاث؟", a: "Connect (349$/30يوم) للتداول الأساسي والمجتمع، Create (999$/60يوم) للتداول الذكي مع دعم متكامل واستراتيجية Tiger، Complete (1,699$/90يوم) الأقوى والأشمل مع SB Model الجيل الجديد والإرشاد الشخصي." },
     { q: "ما هو مشروع X؟", a: "نظام متقدم يجمع بين التداول والذكاء الاصطناعي والتعليم التطبيقي والدخل السلبي." },
     { q: "ما هو الناسخ؟", a: "نظام ينسخ صفقات المحترفين تلقائياً لحسابك بنفس اللحظة — بدون تحليل أو تدخل." },
     { q: "ما هو E-MODEL؟", a: "نظام دخل سلبي من التجارة الإلكترونية بدون تداول — مضمّن في جميع الباقات." },
@@ -775,9 +840,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
-
-
-
-
-
-
