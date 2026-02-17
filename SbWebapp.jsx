@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { useState, useEffect, useRef } from "react";
 
 const COACH_TELEGRAM = "https://t.me/omo_rabah";
@@ -758,3 +760,11 @@ export default function App() {
     </div>
   );
 }
+// ==========================================
+// هذا هو الجزء المفقود والمهم جداً للتشغيل
+// ==========================================
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
