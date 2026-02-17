@@ -271,7 +271,7 @@ function Hero({ setActive }) {
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
             backgroundSize: "200% 200%", animation: "shimmer 4s ease infinite"
           }}>
-            كوتش عمر رباح الباشا
+            كوتش عمر الباشا
           </h1>
         </FadeIn>
         <FadeIn delay={0.2}>
@@ -768,5 +768,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
 
 
