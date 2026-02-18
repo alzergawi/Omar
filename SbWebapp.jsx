@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { useState, useEffect, useRef } from "react";
 
 const COACH_TELEGRAM = "https://t.me/omo_rabah";
+const WHATSAPP_URL = "https://wa.me/YOURPHONENUMBER";
+const TELEGRAM_URL = "https://t.me/YOURUSERNAME";
 const WEBSITE_URL = "https://yourwebsite.com";
 const BOOKING_URL = "https://yourwebsite.com/booking";
 
@@ -14,6 +16,40 @@ const CHANNELS = {
   signals: "https://t.me/YourSignalsChannel",
   fundy: "https://t.me/YourFundyChannel",
 };
+
+// ═══════════════════════════════════
+// Hero Banner Image path
+// ═══════════════════════════════════
+// ضع صورة البانر في نفس مجلد المشروع باسم:
+// hero-banner.jpg
+const HERO_IMAGE = "/hero-banner.jpg";
+
+// ═══════════════════════════════════
+// صور الأقسام — ضعها في مجلد public
+// ═══════════════════════════════════
+// /go-intel.jpg
+// /strategies.jpg
+// /indicators.jpg
+// /go-os.jpg
+
+// ═══════════════════════════════════
+// SVG Icons
+// ═══════════════════════════════════
+function WhatsAppIcon({ size = 24 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  );
+}
+
+function TelegramIcon({ size = 24 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    </svg>
+  );
+}
 
 // ═══════════════════════════════════
 // Animated Background
@@ -168,6 +204,92 @@ function SectionTitle({ icon, title, sub }) {
 }
 
 // ═══════════════════════════════════
+// Image Section Card (for GO Intel, Strategies, etc.)
+// ═══════════════════════════════════
+function ImageSectionCard({ image, children, reverse }) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+      gap: 32,
+      alignItems: "center",
+      marginBottom: 48,
+    }}>
+      {reverse ? (
+        <>
+          <div>{children}</div>
+          <div style={{ order: -1 }}>
+            <div style={{
+              borderRadius: 20,
+              overflow: "hidden",
+              border: "1px solid rgba(212,175,55,0.2)",
+              aspectRatio: "16/10",
+              background: "rgba(255,255,255,0.03)",
+            }}>
+              <img src={image} alt="" style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              }} onError={(e) => { e.target.style.display = "none"; }} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div>
+            <div style={{
+              borderRadius: 20,
+              overflow: "hidden",
+              border: "1px solid rgba(212,175,55,0.2)",
+              aspectRatio: "16/10",
+              background: "rgba(255,255,255,0.03)",
+            }}>
+              <img src={image} alt="" style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              }} onError={(e) => { e.target.style.display = "none"; }} />
+            </div>
+          </div>
+          <div>{children}</div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════
+// Expandable Detail Card
+// ═══════════════════════════════════
+function DetailCard({ icon, title, desc, items, color = "#d4af37", defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <Card onClick={() => setOpen(!open)} style={{ cursor: "pointer" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          {icon && <span style={{ fontSize: 28 }}>{icon}</span>}
+          <div>
+            <h4 style={{ fontSize: 17, fontWeight: 700, color, margin: 0, fontFamily: "'Tajawal', sans-serif" }}>{title}</h4>
+            {desc && <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", margin: "4px 0 0" }}>{desc}</p>}
+          </div>
+        </div>
+        <span style={{
+          color, fontSize: 20, transition: "transform 0.3s",
+          transform: open ? "rotate(45deg)" : "rotate(0)",
+          flexShrink: 0,
+        }}>+</span>
+      </div>
+      {open && items && (
+        <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          {items.map((item, i) => (
+            <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+              <span style={{ color, flexShrink: 0, fontSize: 12, marginTop: 3 }}>◆</span>
+              <span style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>{item}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+// ═══════════════════════════════════
 // Navigation
 // ═══════════════════════════════════
 function Nav({ active, setActive }) {
@@ -181,9 +303,9 @@ function Nav({ active, setActive }) {
 
   const items = [
     { id: "home", label: "الرئيسية" },
-    { id: "projectx", label: "مشروع X" },
+    { id: "gointel", label: "GO Intel" },
+    { id: "goos", label: "GO OS" },
     { id: "packages", label: "الباقات" },
-    { id: "ai", label: "الذكاء الاصطناعي" },
     { id: "success", label: "قصص النجاح" },
     { id: "contact", label: "تواصل" },
   ];
@@ -254,38 +376,49 @@ function Nav({ active, setActive }) {
 }
 
 // ═══════════════════════════════════
-// Hero Section (تعديل حرف الشين)
+// Hero Section
 // ═══════════════════════════════════
 function Hero({ setActive }) {
   return (
-    <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "120px 24px 80px", position: "relative" }}>
+    <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 24px 60px", position: "relative" }}>
+      {/* Hero Banner Image */}
+      <FadeIn style={{ width: "100%", maxWidth: 900, marginBottom: 40 }}>
+        <div style={{
+          borderRadius: 24,
+          overflow: "hidden",
+          border: "1px solid rgba(212,175,55,0.3)",
+          boxShadow: "0 20px 80px rgba(212,175,55,0.1)",
+          aspectRatio: "16/7",
+          background: "linear-gradient(135deg, rgba(212,175,55,0.1), rgba(10,10,10,0.9))",
+        }}>
+          <img src={HERO_IMAGE} alt="الباشا" style={{
+            width: "100%", height: "100%", objectFit: "cover", display: "block",
+          }} onError={(e) => {
+            e.target.style.display = "none";
+          }} />
+        </div>
+      </FadeIn>
+
       <div style={{ textAlign: "center", maxWidth: 800, position: "relative", zIndex: 1 }}>
         <FadeIn>
           <Badge>🇫🇷 رائد أعمال في فرنسا</Badge>
         </FadeIn>
         <FadeIn delay={0.1}>
           <h1 style={{
-            fontSize: "clamp(36px, 7vw, 64px)", 
-            fontWeight: 800, // تقليل السماكة قليلاً ليصبح الحرف أوضح
-            lineHeight: 1.5, // ✅ زيادة ارتفاع السطر لمنع قص النقاط
-            paddingBottom: 10, // ✅ إضافة مسافة لمنع قص الحروف من الأسفل أو الأعلى
-            paddingTop: 10,    // ✅ مسافة للأعلى للنقاط
-            margin: "14px 0 0", 
-            fontFamily: "'Tajawal', sans-serif",
+            fontSize: "clamp(36px, 7vw, 64px)", fontWeight: 900, lineHeight: 1.15,
+            margin: "24px 0 0", fontFamily: "'Tajawal', sans-serif",
             background: "linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",
-            WebkitBackgroundClip: "text", 
-            WebkitTextFillColor: "transparent",
-            backgroundSize: "200% 200%", 
-            animation: "shimmer 4s ease infinite"
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+            backgroundSize: "200% 200%", animation: "shimmer 4s ease infinite"
           }}>
-            كوتش عمر الباشا
+            كوتش عمر رباح الباشا
           </h1>
         </FadeIn>
         <FadeIn delay={0.2}>
           <p style={{
             fontSize: 22, color: "#d4af37", margin: "16px 0 0",
             fontWeight: 700, fontFamily: "'Tajawal', sans-serif",
-            letterSpacing: 0 // الأحرف العربية لا تحتاج تباعد كبير
+            letterSpacing: 1
           }}>
             ✦ الباشا معكم.. فلا خوف عليكم ✦
           </p>
@@ -295,7 +428,7 @@ function Hero({ setActive }) {
             fontSize: 18, color: "rgba(255,255,255,0.65)", margin: "20px auto 0",
             maxWidth: 550, lineHeight: 1.8
           }}>
-            احد مؤسسين نظام <strong style={{ color: "#d4af37" }}>SB Model</strong> ومشروع <strong style={{ color: "#d4af37" }}>X</strong>
+            مؤسس نظام <strong style={{ color: "#d4af37" }}>SB Model</strong> ومشروع <strong style={{ color: "#d4af37" }}>X</strong>
             <br />مستشار وخبير في أسواق المال
             <br />تداول • استثمار • ذكاء اصطناعي • دخل سلبي
           </p>
@@ -314,88 +447,204 @@ function Hero({ setActive }) {
         <FadeIn delay={0.5}>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
             <Btn primary onClick={() => setActive("packages")}>📦 ابدأ الآن</Btn>
-            <Btn outline onClick={() => setActive("projectx")}>🚀 استكشف مشروع X</Btn>
+            <Btn outline onClick={() => setActive("gointel")}>🚀 استكشف GO Intel</Btn>
           </div>
         </FadeIn>
-
-        {/* ═══ فيديو تعريفي — كوتش عمر ═══ */}
-        <FadeIn delay={0.6}>
-          <div style={{
-            marginTop: 48, borderRadius: 20, overflow: "hidden",
-            border: "1px solid rgba(212,175,55,0.3)",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
-            background: "rgba(0,0,0,0.4)",
-            maxWidth: 700, marginInline: "auto"
-          }}>
-            <div style={{ textAlign: "center", padding: "16px 16px 8px" }}>
-              <span style={{ fontSize: 14, fontWeight: 700, color: "#d4af37" }}>🎬 تعرّف على كوتش عمر</span>
-            </div>
-            {/* ══ غيّر VIDEO_ID_HERE برقم فيديو اليوتيوب ══ */}
-            {/* ══ مثال: رابط https://www.youtube.com/watch?v=abc123 → الـ ID هو abc123 ══ */}
-            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-              <iframe
-                src="https://www.youtube.com/embed/0WQrnPqGctQ?rel=0&modestbranding=1"
-                title="تعرّف على كوتش عمر"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "100%", height: "100%",
-                  borderRadius: "0 0 20px 20px"
-                }}
-              />
-            </div>
-          </div>
-        </FadeIn>
-
       </div>
     </section>
   );
 }
 
 // ═══════════════════════════════════
-// Project X Section
+// GO Intel Section
 // ═══════════════════════════════════
-function ProjectX({ setActive }) {
-  const features = [
-    { icon: "📐", title: "الاستراتيجيات", desc: "X Psychology • X Master • X Logic", detail: "سيكولوجية التداول، إتقان SB Model، والتحليل العميق بأكثر من 40 مدرسة تحليل" },
-    { icon: "🤖", title: "الذكاء الاصطناعي", desc: "تحليل • توصيات • مؤشرات", detail: "تحليل آلاف الشموع خلال ثواني، اكتشاف الفرص، تحديد مناطق الدخول والخروج بدقة" },
-    { icon: "🔄", title: "الناسخ — Copy Trading", desc: "نسخ صفقات المحترفين تلقائياً", detail: "نفس الدخول ونفس الخروج — ربح أذكى بوقت أقل بدون تحليل أو تدخل منك" },
-    { icon: "💰", title: "E-Commers — دخل سلبي", desc: "بدون تداول • بدون مخاطرة", detail: "عمولات أسبوعية، مضاعفة أرباح، أصل رقمي 24/7، سحب سريع — من 600$ إلى 250,000$ شهرياً" },
-    { icon: "💵", title: "حسابات ممولة — X FUNDY", desc: "تداول بدون رأس مال شخصي", detail: "حسابات تصل لـ 200,000$ مع دعم كامل في اجتياز التقييم ونسبة أرباح عالية" },
-    { icon: "📊", title: "Go Ai — التوصيات", desc: "فوركس • كريبتو • أسهم", detail: "توصيات يومية بالذكاء الاصطناعي مع نقاط دخول وخروج دقيقة وإدارة مخاطر" },
+function GoIntel({ setActive }) {
+  const markets = [
+    { icon: "💱", name: "Forex", desc: "أزواج العملات الرئيسية والثانوية" },
+    { icon: "📈", name: "Stocks", desc: "الأسهم العالمية" },
+    { icon: "🪙", name: "Crypto", desc: "العملات الرقمية" },
   ];
+
+  const strategies = [
+    { icon: "🎯", title: "Maestro", desc: "Total market intelligence at a glance.", items: ["رؤية شاملة للسوق في لحظة", "تحليل متعدد الأطر الزمنية", "دمج المؤشرات والهيكل السعري", "تنبيهات ذكية فورية"] },
+    { icon: "🔍", title: "Seeker", desc: "Precision entries made simple.", items: ["نقاط دخول دقيقة ومبسطة", "فلترة إشارات السوق الضوضائية", "تحديد أفضل لحظات الدخول", "مناسب للمبتدئين والمحترفين"] },
+    { icon: "🏛️", title: "SMC", desc: "Institutional-Driven Market Framework.", items: ["إطار عمل مبني على حركة المؤسسات", "تحديد مناطق السيولة", "تتبع الأموال الذكية Smart Money", "كشف التلاعب المؤسسي"] },
+    { icon: "⚡", title: "Strike 90", desc: "Built for precision timing and discipline.", items: ["دقة توقيت عالية جداً", "نظام انضباط صارم", "نسبة نجاح مرتفعة", "مثالي للصفقات السريعة"] },
+    { icon: "📊", title: "Technical Analysis", desc: "Structure-Based Price Analysis.", items: ["تحليل هيكلي للسعر", "الدعم والمقاومة الديناميكية", "أنماط الشموع اليابانية", "تحليل الترندات والقنوات السعرية"] },
+  ];
+
+  const indicators = [
+    { icon: "🛡️", title: "Defender", desc: "Capital protection and risk clarity.", items: ["حماية رأس المال أولاً", "وضوح كامل في إدارة المخاطر", "تحديد وقف الخسارة الذكي", "حساب حجم الصفقة الآمن"] },
+    { icon: "🏹", title: "Hunter", desc: "Quick momentum-based execution.", items: ["تنفيذ سريع مبني على الزخم", "اقتناص الفرص اللحظية", "مؤشر قوة الاتجاه", "إشارات دخول وخروج فورية"] },
+    { icon: "🎯", title: "Maestro", desc: "Total market intelligence at a glance.", items: ["ذكاء سوقي شامل", "لوحة تحكم متكاملة", "تحليل متعدد الأبعاد", "قراءة فورية للسوق"] },
+    { icon: "🔍", title: "Seeker", desc: "Precision entries made simple.", items: ["دخول دقيق مبسط", "كشف فرص الدخول المثالية", "فلتر إشارات عالي الجودة", "مناسب لجميع المستويات"] },
+    { icon: "🎯", title: "Strike90", desc: "High-probability strike zone.", items: ["منطقة ضربة عالية الاحتمالية", "توقيت مثالي للدخول", "نظام ثقة مبني على البيانات", "أداء مُثبت ومُختبر"] },
+  ];
+
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="🚀" title="مشروع X" sub="تحوّل لعقلية الاحتراف والحرية المالية" />
+      <SectionTitle icon="📊" title="GO Intel" sub="معلومات تداول فورية عبر الأسواق الرئيسية" />
+
+      {/* Intro */}
       <FadeIn>
         <Card gold style={{ textAlign: "center", marginBottom: 48, padding: "40px 24px" }}>
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.8)", lineHeight: 2, margin: 0 }}>
-            مشروع X يمثل نظاماً متقدماً يجمع بين <strong style={{ color: "#d4af37" }}>التداول المتخصص</strong>
-            {" "}و<strong style={{ color: "#d4af37" }}>الذكاء الاصطناعي</strong>
-            {" "}و<strong style={{ color: "#d4af37" }}>التعليم التطبيقي</strong>
-            {" "}و<strong style={{ color: "#d4af37" }}>بناء دخل ثابت</strong>
-            <br /><br />
-            يسعى لتحويل المتداول من ❌ مراقب للسوق إلى ✅ متداول متمرس + رائد أعمال ناجح
+            <strong style={{ color: "#d4af37" }}>GO INTEL</strong> يقدم معلومات تداول فورية عبر الأسواق الرئيسية
+            <br />
+            بدلاً من مطاردة الرسوم البيانية طوال اليوم، يحصل الأعضاء على
+            <br />
+            <strong style={{ color: "#d4af37" }}>سياق سوقي واضح</strong> و<strong style={{ color: "#d4af37" }}>رؤى قابلة للتنفيذ</strong>
           </p>
+          <Btn outline small href="#" style={{ marginTop: 20 }}>Open Bot</Btn>
         </Card>
+      </FadeIn>
+
+      {/* GO Intel Image + Markets */}
+      <FadeIn>
+        <ImageSectionCard image="/go-intel.jpg">
+          <div>
+            <h3 style={{ fontSize: 24, fontWeight: 800, color: "#d4af37", margin: "0 0 16px", fontFamily: "'Tajawal', sans-serif" }}>الأسواق المدعومة</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {markets.map((m, i) => (
+                <Card key={i} gold style={{ display: "flex", gap: 14, alignItems: "center", padding: "16px 20px" }}>
+                  <span style={{ fontSize: 32 }}>{m.icon}</span>
+                  <div>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: "#fff" }}>{m.name}</div>
+                    <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>{m.desc}</div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </ImageSectionCard>
+      </FadeIn>
+
+      {/* Strategies */}
+      <FadeIn delay={0.1}>
+        <div style={{ marginTop: 48 }}>
+          <h3 style={{
+            textAlign: "center", fontSize: 26, color: "#d4af37", fontWeight: 800,
+            fontFamily: "'Tajawal', sans-serif", marginBottom: 8,
+          }}>⚔️ Strategies</h3>
+          <p style={{ textAlign: "center", fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28 }}>استراتيجيات التداول المتقدمة</p>
+        </div>
+      </FadeIn>
+      <FadeIn delay={0.15}>
+        <ImageSectionCard image="/strategies.jpg" reverse>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {strategies.map((s, i) => (
+              <DetailCard key={i} icon={s.icon} title={s.title} desc={s.desc} items={s.items} />
+            ))}
+          </div>
+        </ImageSectionCard>
+      </FadeIn>
+
+      {/* Indicators */}
+      <FadeIn delay={0.2}>
+        <div style={{ marginTop: 48 }}>
+          <h3 style={{
+            textAlign: "center", fontSize: 26, color: "#d4af37", fontWeight: 800,
+            fontFamily: "'Tajawal', sans-serif", marginBottom: 8,
+          }}>📡 Indicators</h3>
+          <p style={{ textAlign: "center", fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 28 }}>المؤشرات الذكية</p>
+        </div>
+      </FadeIn>
+      <FadeIn delay={0.25}>
+        <ImageSectionCard image="/indicators.jpg">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {indicators.map((ind, i) => (
+              <DetailCard key={i} icon={ind.icon} title={ind.title} desc={ind.desc} items={ind.items} color="#a78bfa" />
+            ))}
+          </div>
+        </ImageSectionCard>
+      </FadeIn>
+
+      <FadeIn delay={0.3}>
+        <div style={{ textAlign: "center", marginTop: 40 }}>
+          <Btn primary onClick={() => setActive("packages")}>📦 اختر باقتك الآن</Btn>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════
+// GO OS Section
+// ═══════════════════════════════════
+function GoOS({ setActive }) {
+  const features = [
+    { icon: "🧠", title: "ذكاء تداول شخصي", desc: "كل تجربة مخصصة حسب أهدافك، تحمّل المخاطر، الأسواق المفضلة، وأنماط السلوك — لا يوجد لوحتا تحكم متشابهتان" },
+    { icon: "📡", title: "إشارات مبنية على الذكاء", desc: "الإشارات تُولّد من نماذج ذكاء حية — تعتمد على الاستراتيجية وظروف السوق والاحتمالية — GO OS يشرح لماذا الإشارة موجودة" },
+    { icon: "⚙️", title: "محرك الاستراتيجيات", desc: "منطق متقدم يفكّك تحولات هيكل السوق، مناطق السيولة، إنهاك الزخم، واحتمالية الاستمرار مقابل الانعكاس" },
+    { icon: "📸", title: "تحليل الشارت بالصور", desc: "ارفع صورة شارت وGO OS يحللها — يحدد الهيكل والترند والمستويات الرئيسية ويكتشف أخطاء التنفيذ فوراً" },
+    { icon: "📊", title: "تتبع الأداء الحي", desc: "نسب الربح/الخسارة، أداء الاستراتيجية، الدقة التاريخية حسب السوق، كفاءة التنفيذ الشخصي — بيانات شفافة ومُحدّثة باستمرار" },
+    { icon: "📰", title: "أخبار وبيانات فورية", desc: "GO OS يدمج الأخبار الماكروية والسوقية الفورية ويحولها لسياق قابل للتنفيذ — يفهم التأثير وليس فقط المعلومة" },
+    { icon: "🌍", title: "تواصل متعدد اللغات", desc: "GO OS يتواصل بطلاقة عبر لغات متعددة في الوقت الفعلي — مشاركة عالمية سلسة وشاملة" },
+  ];
+
+  return (
+    <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
+      <SectionTitle icon="🤖" title="GO OS" sub="نظام التشغيل الذكي في قلب منظومة GO" />
+
+      <FadeIn>
+        <Card gold style={{ textAlign: "center", marginBottom: 48, padding: "40px 24px" }}>
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.8)", lineHeight: 2, margin: 0 }}>
+            <strong style={{ color: "#d4af37" }}>GO OS</strong> هو نظام التشغيل الذكي في قلب منظومة GO بالكامل
+            <br />
+            يعمل كالعقل الذي يربط البيانات والاستراتيجية والسلوك والنتائج
+            <br />
+            يحوّل التعقيد إلى <strong style={{ color: "#d4af37" }}>وضوح في الوقت الفعلي</strong>
+          </p>
+          <div style={{ marginTop: 16, fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.8 }}>
+            GO OS لا يقرأ الأسواق فقط — بل يفهم السياق، يتكيّف مع المستخدم، ويتطور مع كل تفاعل
+          </div>
+          <Btn outline small href="#" style={{ marginTop: 20 }}>Open GO OS</Btn>
+        </Card>
+      </FadeIn>
+
+      <FadeIn delay={0.1}>
+        <ImageSectionCard image="/go-os.jpg">
+          <div>
+            <h3 style={{ fontSize: 22, fontWeight: 800, color: "#d4af37", margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif" }}>ماذا يفعل GO OS</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 16 }}>
+              {[
+                "يحلل بيانات السوق والهيكل والزخم والاحتمالية في الوقت الفعلي",
+                "يفلتر ضوضاء السوق ويزيل التحيز العاطفي من القرارات",
+                "يُشغّل جميع تنبيهات ورؤى وأدوات وطبقات ذكاء GO",
+                "يعمل كنظام تشغيل تداول شخصي — وليس مجرد تغذية إشارات عامة",
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                  <span style={{ color: "#d4af37", flexShrink: 0, marginTop: 2 }}>✦</span>
+                  <span style={{ fontSize: 15, color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ImageSectionCard>
+      </FadeIn>
+
+      {/* Core Features Grid */}
+      <FadeIn delay={0.2}>
+        <h3 style={{
+          textAlign: "center", fontSize: 24, color: "#d4af37", fontWeight: 800,
+          fontFamily: "'Tajawal', sans-serif", marginBottom: 28, marginTop: 20,
+        }}>⚡ المميزات الأساسية</h3>
       </FadeIn>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 20 }}>
         {features.map((f, i) => (
-          <FadeIn key={i} delay={i * 0.08}>
+          <FadeIn key={i} delay={0.25 + i * 0.06}>
             <Card style={{ height: "100%" }}>
               <div style={{ fontSize: 40, marginBottom: 12 }}>{f.icon}</div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: "#d4af37", margin: "0 0 6px", fontFamily: "'Tajawal', sans-serif" }}>{f.title}</h3>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", margin: "0 0 12px", fontWeight: 600 }}>{f.desc}</p>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", margin: 0, lineHeight: 1.8 }}>{f.detail}</p>
+              <h4 style={{ fontSize: 18, fontWeight: 700, color: "#d4af37", margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif" }}>{f.title}</h4>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", margin: 0, lineHeight: 1.8 }}>{f.desc}</p>
             </Card>
           </FadeIn>
         ))}
       </div>
-      <FadeIn delay={0.4}>
+
+      <FadeIn delay={0.5}>
         <div style={{ textAlign: "center", marginTop: 40 }}>
-          <Btn primary onClick={() => setActive("packages")}>📦 اختر باقتك الآن</Btn>
+          <Btn primary onClick={() => setActive("packages")}>📦 اشترك للوصول</Btn>
         </div>
       </FadeIn>
     </section>
@@ -406,90 +655,99 @@ function ProjectX({ setActive }) {
 // Packages Section
 // ═══════════════════════════════════
 function Packages() {
-  const [hoveredPkg, setHoveredPkg] = useState(null);
-
   const pkgs = [
     {
-      id: "connect",
-      name: "باقة Connect",
-      // ══ ضع مسار صورة باقة Connect هنا ══
-      image: "/images/connect.JPEG",
-      price: "349",
-      days: "30",
-      color: "#4a90d9",
-      recommended: false,
-      link: COACH_TELEGRAM,
+      id: "lite", name: "LITE Package", tag: "للأفراد الجدد", price: "349", origPrice: "999", days: "30",
+      color: "#4ade80", recommended: false,
+      eTrading: ["2 قنوات توصيات", "تداول مدعوم بالذكاء الاصطناعي", "مؤشرات خاصة", "نظام ذكي لتقييم أدائك وانضباطك"],
+      strategy: "استراتيجية الدخول R1+R2",
+      strategyDetails: ["ملف جاهز لإدارة المخاطر", "خطة تطبيق يومية"],
+      eModel: true,
     },
     {
-      id: "create",
-      name: "باقة Create",
-      // ══ ضع مسار صورة باقة Create هنا ══
-      image: "/images/create.JPEG",
-      price: "999",
-      days: "60",
-      color: "#2dd4a0",
-      recommended: false,
-      link: COACH_TELEGRAM,
+      id: "pro", name: "Pro Package", tag: "للمستثمرين المتوسطين", price: "999", origPrice: "2,999", days: "60",
+      color: "#d4af37", recommended: true,
+      eTrading: ["5 قنوات توصيات بالـ AI", "تداول مدعوم بالذكاء الاصطناعي", "مؤشرات خاصة بالـ AI", "تداول لايف يومي مع المحللين", "كورس الحسابات الممولة والربح بالـ AI"],
+      strategy: "🍊 استراتيجية برتقالة الفجر",
+      strategyDetails: ["استراتيجية التداول الذكية", "تعمل على MT5", "تركّز على نقاط الدخول بدقة عالية"],
+      eModel: true,
     },
     {
-      id: "complete",
-      name: "باقة Complete",
-      // ══ ضع مسار صورة باقة Complete هنا ══
-      image: "/images/complete.JPEG",
-      price: "1,699",
-      days: "90",
-      color: "#a78bfa",
-      recommended: true,
-      link: COACH_TELEGRAM,
+      id: "ultra", name: "ULTRA Package", tag: "للمحترفين", price: "1,699", origPrice: "4,999", days: "90",
+      color: "#a78bfa", recommended: false,
+      eTrading: ["12 قناة توصيات بالـ AI", "4 مؤشرات التداول بالـ AI", "تداول لايف يومي مع المحللين", "تداول بالـ AI", "جلسات خاصة لتحليل حسابك وأخطائك", "كورس الحسابات الممولة والربح بالـ AI", "كورس نفسي لبناء عقلية المتداول"],
+      strategy: "⚡ الجيل الجديد من SB MODEL",
+      strategyDetails: ["مستويات SB MODEL بالـ AI", "مستوى SB-Raven", "نقلة نوعية في التحليل الموجي والتداول الذكي"],
+      eModel: true,
     },
   ];
 
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="📦" title="الباقات التعليمية" sub="استثمر في مستقبلك المالي — اختر الباقة المناسبة لك" />
+      <SectionTitle icon="📦" title="الباقات التعليمية" sub="استثمر في مستقبلك المالي — نظام مُجرّب ومبني على نتائج حقيقية" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 24, alignItems: "stretch" }}>
         {pkgs.map((p, i) => (
           <FadeIn key={p.id} delay={i * 0.12}>
-            <div
-              style={{ position: "relative", height: "100%" }}
-              onMouseEnter={() => setHoveredPkg(p.id)}
-              onMouseLeave={() => setHoveredPkg(null)}
-            >
+            <div style={{ position: "relative", height: "100%" }}>
               {p.recommended && (
                 <div style={{
                   position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", zIndex: 2,
-                  background: "linear-gradient(135deg, #a78bfa, #7c3aed)", color: "#fff",
+                  background: "linear-gradient(135deg, #d4af37, #b8941f)", color: "#0a0a0a",
                   padding: "6px 24px", borderRadius: 50, fontSize: 13, fontWeight: 800,
                   fontFamily: "'Tajawal', sans-serif", whiteSpace: "nowrap"
-                }}>⭐ الأقوى والأشمل</div>
+                }}>⭐ يُوصى بها</div>
               )}
-              <div style={{
-                borderRadius: 20, overflow: "hidden",
-                border: p.recommended ? `2px solid ${p.color}` : "1px solid rgba(255,255,255,0.1)",
-                transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
-                transform: hoveredPkg === p.id ? "translateY(-8px) scale(1.02)" : "translateY(0) scale(1)",
-                boxShadow: hoveredPkg === p.id
-                  ? `0 20px 60px rgba(${p.recommended ? '167,139,250' : '0,0,0'},0.25)`
-                  : "0 4px 20px rgba(0,0,0,0.2)",
-                background: "rgba(255,255,255,0.03)",
+              <Card gold={p.recommended} glow={p.recommended} style={{
                 height: "100%", display: "flex", flexDirection: "column",
+                border: p.recommended ? "1px solid rgba(212,175,55,0.5)" : "1px solid rgba(255,255,255,0.08)",
               }}>
-                <img
-                  src={p.image}
-                  alt={p.name}
-                  style={{
-                    width: "100%", display: "block",
-                    objectFit: "cover",
-                  }}
-                  loading="lazy"
-                />
-                <div style={{ padding: "20px 24px", marginTop: "auto" }}>
-                  <Btn primary={p.recommended} outline={!p.recommended} full href={p.link}
-                    style={p.recommended ? { background: `linear-gradient(135deg, ${p.color}, #7c3aed)`, color: "#fff" } : { borderColor: `${p.color}88`, color: p.color }}>
-                    🚀 اشترك الآن — {p.price}$
+                <div style={{ textAlign: "center", marginBottom: 20 }}>
+                  <Badge color={p.color}>{p.tag}</Badge>
+                  <h3 style={{ fontSize: 26, fontWeight: 800, color: p.color, margin: "16px 0 4px", fontFamily: "'Tajawal', sans-serif" }}>{p.name}</h3>
+                  <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "line-through" }}>قيمة المحتوى {p.origPrice}$</div>
+                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 4, marginTop: 8 }}>
+                    <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", fontFamily: "'Tajawal', sans-serif" }}>{p.price}</span>
+                    <span style={{ fontSize: 18, color: "rgba(255,255,255,0.5)" }}>$</span>
+                  </div>
+                  <div style={{ fontSize: 14, color: "rgba(255,255,255,0.4)" }}>{p.days} يوم</div>
+                </div>
+
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 16, marginBottom: 12 }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: p.color, marginBottom: 10, letterSpacing: 1 }}>📊 e-Trading</div>
+                  {p.eTrading.map((item, j) => (
+                    <div key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+                      <span style={{ color: p.color, flexShrink: 0 }}>✅</span>
+                      <span style={{ fontSize: 14, color: "rgba(255,255,255,0.75)" }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 12, marginBottom: 12 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: p.color, marginBottom: 8 }}>{p.strategy}</div>
+                  {p.strategyDetails.map((s, j) => (
+                    <div key={j} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+                      <span style={{ color: p.color, flexShrink: 0 }}>•</span>
+                      <span style={{ fontSize: 13, color: "rgba(255,255,255,0.65)" }}>{s}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 12, marginBottom: 20 }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: p.color, marginBottom: 8 }}>💰 e-Model (الدخل السلبي)</div>
+                  {["Weekly Commission — عمولات أسبوعية", "Leverage Profit — مضاعفة الأرباح", "Business Asset 24/7 — أصل رقمي", "Fast Payout — سحب سريع"].map((m, j) => (
+                    <div key={j} style={{ display: "flex", gap: 8, marginBottom: 5 }}>
+                      <span style={{ color: p.color, flexShrink: 0, fontSize: 12 }}>💎</span>
+                      <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>{m}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: "auto" }}>
+                  <Btn primary={p.recommended} outline={!p.recommended} full href={COACH_TELEGRAM}>
+                    اشترك الآن — {p.price}$
                   </Btn>
                 </div>
-              </div>
+              </Card>
             </div>
           </FadeIn>
         ))}
@@ -504,143 +762,29 @@ function Packages() {
 }
 
 // ═══════════════════════════════════
-// AI Section
-// ═══════════════════════════════════
-function AISection({ setActive }) {
-  const items = [
-    { icon: "⚡", text: "تحليل آلاف الشموع والمؤشرات خلال ثواني" },
-    { icon: "🔍", text: "اكتشاف الفرص قبل ما يلاحظها الإنسان" },
-    { icon: "🎯", text: "تحديد مناطق الدخول والخروج بدقة أعلى" },
-    { icon: "🧠", text: "تقليل العاطفة والأخطاء النفسية في التداول" },
-    { icon: "📊", text: "تحليل السوق على 40 مدرسة تحليل بضغطة زر" },
-    { icon: "🤖", text: "آلية دخول الصفقات الذكية" },
-  ];
-  const channels = [
-    { icon: "💱", name: "الفوركس", desc: "العملات الأجنبية" },
-    { icon: "🪙", name: "الكريبتو", desc: "العملات الرقمية" },
-    { icon: "📈", name: "الأسهم", desc: "أسهم عالمية (حلال)" },
-  ];
-  return (
-    <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="🤖" title="الذكاء الاصطناعي" sub="الذكاء الاصطناعي في خدمة تداولك" />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 20, marginBottom: 40 }}>
-        {items.map((it, i) => (
-          <FadeIn key={i} delay={i * 0.06}>
-            <Card style={{ display: "flex", gap: 14, alignItems: "center" }}>
-              <span style={{ fontSize: 28, flexShrink: 0 }}>{it.icon}</span>
-              <span style={{ fontSize: 15, color: "rgba(255,255,255,0.8)" }}>{it.text}</span>
-            </Card>
-          </FadeIn>
-        ))}
-      </div>
-      <FadeIn delay={0.3}>
-        <h3 style={{ textAlign: "center", fontSize: 22, color: "#d4af37", fontWeight: 700, fontFamily: "'Tajawal', sans-serif", marginBottom: 24 }}>
-          📡 قنوات التوصيات بالـ AI
-        </h3>
-      </FadeIn>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 16, marginBottom: 32 }}>
-        {channels.map((ch, i) => (
-          <FadeIn key={i} delay={0.4 + i * 0.08}>
-            <Card gold style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 40 }}>{ch.icon}</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginTop: 8 }}>{ch.name}</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>{ch.desc}</div>
-            </Card>
-          </FadeIn>
-        ))}
-      </div>
-      <FadeIn delay={0.5}>
-        <Card style={{ textAlign: "center", padding: 32, background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.2)" }}>
-          <div style={{ fontSize: 20, fontWeight: 700, color: "#d4af37", marginBottom: 8 }}>📊 عدد القنوات حسب الباقة</div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", marginTop: 16 }}>
-            {[{ name: "Connect", count: "3", color: "#4a90d9" }, { name: "Create", count: "5", color: "#2dd4a0" }, { name: "Complete", count: "12", color: "#a78bfa" }].map(p => (
-              <div key={p.name} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 36, fontWeight: 900, color: p.color }}>{p.count}</div>
-                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>{p.name}</div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      </FadeIn>
-      <div style={{ textAlign: "center", marginTop: 32 }}>
-        <Btn primary onClick={() => setActive("packages")}>📦 اشترك للوصول</Btn>
-      </div>
-    </section>
-  );
-}
-
-// ═══════════════════════════════════
 // Success Stories
 // ═══════════════════════════════════
 function SuccessStories({ setActive }) {
   const stories = [
-    {
-      flag: "🇮🇶",
-      name: "مرتضى من العراق",
-      text: "بدأ بمبلغ 21$ وخلال 27 يوم وصل إلى 3,000$ وسحب 2 مليون دينار عراقي",
-      highlight: "3,000$ ← 21$",
-      // ══ ضع رابط فيديو مرتضى هنا ══
-      video: "/videos/success-murtaza.mp4",
-    },
-    {
-      flag: "🇱🇾",
-      name: "حليمة من ليبيا",
-      text: "مدرّسة وأم لأربعة أطفال، دخلت المجال لتطوّر الواقع المالي لعائلتها. بدأت بـ 100$ وخلال شهر واحد أصبحت 22,000$!",
-      highlight: "22,000$ ← 100$",
-      // ══ ضع رابط فيديو حليمة هنا ══
-      video: "/videos/success-halima.mp4",
-    },
-    {
-      flag: "🏅",
-      name: "مدرب في مشروع X",
-      text: "قبل ما يدخل معي كان خسران 20,000$ والآن حقق 400,000$ خلال 30 يوم فقط!",
-      highlight: "20K$ → 400K$",
-      // ══ ضع رابط فيديو مدرب مشروع X هنا ══
-      video: "/videos/success-projectx-trainer.mp4",
-    },
+    { flag: "🇮🇶", name: "متدرب مرتضى من العراق", text: "بدأ بمبلغ 21$ وخلال 27 يوم وصل إلى 3,000$ وسحب 2 مليون دينار عراقي", highlight: "21$ → 3,000$" },
+    { flag: "🏅", name: "مدرب في مشروع X", text: "قبل ما يدخل معي كان خسران 20,000$ والآن حقق 400,000$ خلال 30 يوم فقط!", highlight: "-20K$ → +400K$" },
+    { flag: "🎓", name: "ورشة تدريب مكثف أوف لاين", text: "تجمعات مع المتدربين وأخذ تعليمات وأسرار تساعدهم في مجال التداول والأسواق المالية", highlight: "تدريب حي" },
   ];
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1200, margin: "0 auto" }}>
-      <SectionTitle icon="🏆" title="قصص نجاح متدربيني" sub="شاهد بنفسك — قصص حقيقية من متدربين تحت إشرافي" />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 24 }}>
+      <SectionTitle icon="🏆" title="قصص نجاح متدربيني" sub="آراء المتدربين تحت إشرافي" />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 20 }}>
         {stories.map((s, i) => (
-          <FadeIn key={i} delay={i * 0.12}>
-            <Card gold style={{ textAlign: "center", padding: 0, overflow: "hidden" }}>
-              {/* ═══ فيديو قصة النجاح ═══ */}
+          <FadeIn key={i} delay={i * 0.1}>
+            <Card gold style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 48, marginBottom: 12 }}>{s.flag}</div>
+              <h4 style={{ fontSize: 18, fontWeight: 700, color: "#d4af37", margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif" }}>{s.name}</h4>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.8, margin: "0 0 16px" }}>{s.text}</p>
               <div style={{
-                position: "relative", background: "#000",
-                borderBottom: "1px solid rgba(212,175,55,0.2)"
-              }}>
-                <video
-                  controls
-                  playsInline
-                  preload="metadata"
-                  style={{ width: "100%", display: "block", aspectRatio: "9/16", maxHeight: 420, objectFit: "cover" }}
-                >
-                  <source src={s.video} type="video/mp4" />
-                  متصفحك لا يدعم عرض الفيديو
-                </video>
-              </div>
-
-              {/* ═══ معلومات القصة ═══ */}
-              <div style={{ padding: "20px 24px 24px" }}>
-                <div style={{ fontSize: 36, marginBottom: 8 }}>{s.flag}</div>
-                <h4 style={{
-                  fontSize: 18, fontWeight: 700, color: "#d4af37",
-                  margin: "0 0 8px", fontFamily: "'Tajawal', sans-serif"
-                }}>{s.name}</h4>
-                <p style={{
-                  fontSize: 14, color: "rgba(255,255,255,0.7)",
-                  lineHeight: 1.8, margin: "0 0 16px"
-                }}>{s.text}</p>
-                <div style={{
-                  display: "inline-block", padding: "10px 28px", borderRadius: 50,
-                  background: "linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.08))",
-                  color: "#d4af37", fontSize: 20, fontWeight: 800,
-                  fontFamily: "'Tajawal', sans-serif",
-                  border: "1px solid rgba(212,175,55,0.3)"
-                }}>{s.highlight}</div>
-              </div>
+                display: "inline-block", padding: "8px 24px", borderRadius: 50,
+                background: "rgba(212,175,55,0.15)", color: "#d4af37",
+                fontSize: 18, fontWeight: 800, fontFamily: "'Tajawal', sans-serif"
+              }}>{s.highlight}</div>
             </Card>
           </FadeIn>
         ))}
@@ -667,14 +811,45 @@ function Contact() {
   return (
     <section style={{ padding: "80px 24px", maxWidth: 1000, margin: "0 auto" }}>
       <SectionTitle icon="📞" title="تواصل معنا" sub="نحن هنا لمساعدتك في أي وقت" />
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginBottom: 48 }}>
+        {/* Coach Card */}
         <FadeIn>
           <Card gold>
             <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>👤</div>
             <h4 style={{ textAlign: "center", color: "#d4af37", fontSize: 18, fontWeight: 700, margin: "0 0 16px" }}>كوتش عمر رباح الباشا</h4>
+
+            {/* Social Icons */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 20 }}>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                style={{
+                  width: 52, height: 52, borderRadius: 16,
+                  background: "linear-gradient(135deg, #25D366, #128C7E)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: "#fff", transition: "all 0.3s ease",
+                  boxShadow: "0 4px 15px rgba(37,211,102,0.3)",
+                  textDecoration: "none",
+                }}>
+                <WhatsAppIcon size={26} />
+              </a>
+              <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer"
+                style={{
+                  width: 52, height: 52, borderRadius: 16,
+                  background: "linear-gradient(135deg, #2AABEE, #229ED9)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: "#fff", transition: "all 0.3s ease",
+                  boxShadow: "0 4px 15px rgba(42,171,238,0.3)",
+                  textDecoration: "none",
+                }}>
+                <TelegramIcon size={26} />
+              </a>
+            </div>
+
             <Btn primary full href={COACH_TELEGRAM}>💬 تواصل عبر تلجرام</Btn>
           </Card>
         </FadeIn>
+
+        {/* Booking Card */}
         <FadeIn delay={0.1}>
           <Card>
             <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>📅</div>
@@ -685,20 +860,21 @@ function Contact() {
         </FadeIn>
       </div>
 
+      {/* Community */}
       <FadeIn delay={0.2}>
-        <h3 style={{ textAlign: "center", fontSize: 22, color: "#d4af37", fontWeight: 700, marginBottom: 8, fontFamily: "'Tajawal', sans-serif" }}>
+        <h3 style={{ textAlign: "center", fontSize: 22, color: "#d4af37", fontWeight: 700, marginBottom: 24, fontFamily: "'Tajawal', sans-serif" }}>
           👥 مجتمع الباشا — القنوات والمجموعات
         </h3>
-        <p style={{ textAlign: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>🔒 خاصة بالمشتركين فقط</p>
       </FadeIn>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12 }}>
         {communityLinks.map((ch, i) => (
           <FadeIn key={i} delay={0.3 + i * 0.05}>
-            <Card style={{ textAlign: "center", padding: "20px 12px", opacity: 0.7, cursor: "default" }}>
-              <div style={{ fontSize: 28 }}>{ch.icon}</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 8, fontWeight: 600 }}>{ch.name}</div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 6 }}>🔒 للمشتركين</div>
-            </Card>
+            <a href={ch.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+              <Card style={{ textAlign: "center", padding: "20px 12px" }}>
+                <div style={{ fontSize: 28 }}>{ch.icon}</div>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginTop: 8, fontWeight: 600 }}>{ch.name}</div>
+              </Card>
+            </a>
           </FadeIn>
         ))}
       </div>
@@ -714,10 +890,9 @@ function FAQ() {
   const faqs = [
     { q: "هل أحتاج خبرة سابقة؟", a: "لا أبداً! باقة LITE تبدأ معك من الصفر." },
     { q: "كم أحتاج رأس مال للبدء؟", a: "يمكنك البدء بـ 100$ للتطبيق، أو استخدام الحسابات الممولة بدون رأس مال." },
-    { q: "ما الفرق بين الباقات الثلاث؟", a: "Connect (349$/30يوم) للتداول الأساسي والمجتمع، Create (999$/60يوم) للتداول الذكي مع دعم متكامل واستراتيجية Tiger، Complete (1,699$/90يوم) الأقوى والأشمل مع SB Model الجيل الجديد والإرشاد الشخصي." },
-    { q: "ما هو مشروع X؟", a: "نظام متقدم يجمع بين التداول والذكاء الاصطناعي والتعليم التطبيقي والدخل السلبي." },
-    { q: "ما هو الناسخ؟", a: "نظام ينسخ صفقات المحترفين تلقائياً لحسابك بنفس اللحظة — بدون تحليل أو تدخل." },
-    { q: "ما هو E-MODEL؟", a: "نظام دخل سلبي من التجارة الإلكترونية بدون تداول — مضمّن في جميع الباقات." },
+    { q: "ما الفرق بين الباقات الثلاث؟", a: "LITE (349$/30يوم) للمبتدئين، Pro (999$/60يوم) للمتوسطين مع استراتيجية برتقالة الفجر، ULTRA (1,699$/90يوم) الأقوى مع SB-Raven والجيل الجديد من SB Model." },
+    { q: "ما هو GO Intel؟", a: "نظام معلومات تداول فوري يغطي الفوركس والأسهم والكريبتو مع استراتيجيات ومؤشرات ذكية." },
+    { q: "ما هو GO OS؟", a: "نظام التشغيل الذكي الذي يربط البيانات والاستراتيجية والسلوك — يحول التعقيد إلى قرارات واضحة." },
     { q: "ما هو SB-Raven؟", a: "الجيل الجديد من SB Model بالـ AI — نقلة نوعية في التحليل الموجي والتداول الذكي. متوفر في ULTRA." },
     { q: "هل يمكنني استرجاع المبلغ؟", a: "نعم، خلال أول 7 أيام إذا لم تكن راضياً." },
   ];
@@ -761,7 +936,32 @@ function Footer() {
     }}>
       <div style={{ fontSize: 24, marginBottom: 8 }}>👑</div>
       <div style={{ color: "#d4af37", fontSize: 18, fontWeight: 700, fontFamily: "'Tajawal', sans-serif" }}>الباشا معكم.. فلا خوف عليكم</div>
-      <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, marginTop: 12 }}>© 2026 كوتش عمر رباح الباشا — جميع الحقوق محفوظة</div>
+
+      {/* Footer Social Icons */}
+      <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 20 }}>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+          style={{
+            width: 44, height: 44, borderRadius: 12,
+            background: "rgba(37,211,102,0.15)", border: "1px solid rgba(37,211,102,0.3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#25D366", transition: "all 0.3s ease",
+            textDecoration: "none",
+          }}>
+          <WhatsAppIcon size={22} />
+        </a>
+        <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer"
+          style={{
+            width: 44, height: 44, borderRadius: 12,
+            background: "rgba(42,171,238,0.15)", border: "1px solid rgba(42,171,238,0.3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#2AABEE", transition: "all 0.3s ease",
+            textDecoration: "none",
+          }}>
+          <TelegramIcon size={22} />
+        </a>
+      </div>
+
+      <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, marginTop: 16 }}>© 2026 كوتش عمر رباح الباشا — جميع الحقوق محفوظة</div>
     </footer>
   );
 }
@@ -778,17 +978,17 @@ export default function App() {
 
   const renderSection = () => {
     switch (active) {
-      case "projectx": return <ProjectX setActive={setActive} />;
+      case "gointel": return <GoIntel setActive={setActive} />;
+      case "goos": return <GoOS setActive={setActive} />;
       case "packages": return <Packages />;
-      case "ai": return <AISection setActive={setActive} />;
       case "success": return <SuccessStories setActive={setActive} />;
       case "contact": return <Contact />;
       default: return (
         <>
           <Hero setActive={setActive} />
-          <ProjectX setActive={setActive} />
+          <GoIntel setActive={setActive} />
+          <GoOS setActive={setActive} />
           <Packages />
-          <AISection setActive={setActive} />
           <SuccessStories setActive={setActive} />
           <FAQ />
           <Contact />
@@ -837,12 +1037,9 @@ export default function App() {
     </div>
   );
 }
-// ==========================================
-// هذا هو الجزء المفقود والمهم جداً للتشغيل
-// ==========================================
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
