@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { useState, useEffect, useRef } from "react";
 
 const COACH_TELEGRAM = "https://t.me/omo_rabah";
-const WHATSAPP_URL = "https://wa.me/YOURPHONENUMBER";
-const TELEGRAM_URL = "https://t.me/YOURUSERNAME";
-const INSTAGRAM_URL = "https://instagram.com/YOURUSERNAME";
+const WHATSAPP_URL = "https://wa.me/+33662766729";
+const TELEGRAM_URL = "https://t.me/omo_rabah";
+const INSTAGRAM_URL = "https://www.instagram.com/c.omar6?igsh=MXE5NDlhazM1d3NpMg==";
 const WEBSITE_URL = "https://yourwebsite.com";
 const BOOKING_URL = "https://yourwebsite.com/booking";
 
@@ -196,5 +196,6 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
