@@ -15,7 +15,30 @@ function InstagramIcon({size=24}){return(<svg width={size} height={size} viewBox
 // === مكونات UI الأساسية ===
 function AnimBG(){return(<div style={{position:"fixed",inset:0,zIndex:0,overflow:"hidden",pointerEvents:"none"}}><div style={{position:"absolute",width:600,height:600,borderRadius:"50%",background:"radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)",top:"-10%",right:"-10%",animation:"floatOrb 20s ease-in-out infinite"}}/><div style={{position:"absolute",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)",bottom:"10%",left:"-5%",animation:"floatOrb 25s ease-in-out infinite reverse"}}/><div style={{position:"absolute",width:300,height:300,borderRadius:"50%",background:"radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",top:"40%",left:"50%",animation:"floatOrb 18s ease-in-out infinite"}}/></div>);}
 
-function FadeIn({children,delay=0,style={}}){const ref=useRef(null);const[visible,setVisible]=useState(false);useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){setVisible(true);obs.disconnect();}},{threshold:0.15});obs.observe(el);return()=>obs.disconnect();},[]);return(<div ref={ref} style={{opacity:visible?1:0,transform:visible?"translateY(0)":"translateY(40px)",transition:`opacity 0.7s ${delay}s ease, transform 0.7s ${delay}s ease`,...style}}>{children}</div>);}
+// ✅ FadeIn مُصلح: يحمل width:100% و box-sizing:border-box دائماً
+function FadeIn({children,delay=0,style={}}){
+  const ref=useRef(null);
+  const[visible,setVisible]=useState(false);
+  useEffect(()=>{
+    const el=ref.current;
+    if(!el)return;
+    const obs=new IntersectionObserver(([e])=>{
+      if(e.isIntersecting){setVisible(true);obs.disconnect();}
+    },{threshold:0.15});
+    obs.observe(el);
+    return()=>obs.disconnect();
+  },[]);
+  return(
+    <div ref={ref} style={{
+      opacity:visible?1:0,
+      transform:visible?"translateY(0)":"translateY(40px)",
+      transition:`opacity 0.7s ${delay}s ease, transform 0.7s ${delay}s ease`,
+      width:"100%",
+      boxSizing:"border-box",
+      ...style
+    }}>{children}</div>
+  );
+}
 
 function Card({children,gold,glow,onClick,style={}}){const[hover,setHover]=useState(false);return(<div onClick={onClick} onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} style={{background:gold?"linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(30,30,30,0.95) 100%)":"rgba(255,255,255,0.04)",border:gold?"1px solid rgba(212,175,55,0.4)":"1px solid rgba(255,255,255,0.08)",borderRadius:20,padding:"28px 24px",cursor:onClick?"pointer":"default",transition:"all 0.4s cubic-bezier(0.4,0,0.2,1)",transform:hover&&onClick?"translateY(-6px) scale(1.02)":"translateY(0) scale(1)",boxShadow:hover&&glow?"0 20px 60px rgba(212,175,55,0.15)":hover&&onClick?"0 12px 40px rgba(0,0,0,0.3)":"none",backdropFilter:"blur(20px)",position:"relative",overflow:"hidden",...style}}>{gold&&<div style={{position:"absolute",top:0,left:0,right:0,height:2,background:"linear-gradient(90deg, transparent, #d4af37, transparent)"}}/>}{children}</div>);}
 
@@ -44,39 +67,52 @@ function Nav({active,setActive}){
 function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"100px 24px 60px",position:"relative"}}>
   <FadeIn style={{width:"100%",maxWidth:900,marginBottom:40}}><div style={{borderRadius:24,overflow:"hidden",border:"1px solid rgba(212,175,55,0.3)",boxShadow:"0 20px 80px rgba(212,175,55,0.1)"}}><img src="/images/hero-banner.jpg" alt="الباشا" style={{width:"100%",display:"block"}} onError={(e)=>{e.target.parentElement.parentElement.style.display="none";}}/></div></FadeIn>
   <FadeIn><div style={{width:180,height:180,borderRadius:"50%",overflow:"hidden",border:"4px solid rgba(212,175,55,0.6)",boxShadow:"0 0 60px rgba(212,175,55,0.2), 0 0 120px rgba(212,175,55,0.08)",margin:"0 auto 32px",background:"linear-gradient(135deg, rgba(212,175,55,0.2), rgba(10,10,10,0.9))",position:"relative"}}><img src="/images/coach-profile.webp" alt="كوتش عمر رباح الباشا" style={{width:"110%",height:"110%",objectFit:"cover",display:"block",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%, -50%)"}} onError={(e)=>{e.target.style.display="none";}}/><div style={{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid transparent",borderTopColor:"#d4af37",borderBottomColor:"#d4af37",animation:"spinRing 8s linear infinite",pointerEvents:"none"}}/></div></FadeIn>
-  <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1}}>
+  <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1,width:"100%",boxSizing:"border-box"}}>
     <FadeIn delay={0.05}><Badge>🇫🇷 رائد أعمال في فرنسا</Badge></FadeIn>
     <FadeIn delay={0.15}><h1 style={{fontSize:"clamp(36px, 7vw, 64px)",fontWeight:900,lineHeight:1.15,margin:"24px 0 0",fontFamily:"'Tajawal', sans-serif",background:"linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundSize:"200% 200%",animation:"shimmer 4s ease infinite"}}>كوتش عمر رباح الباشا</h1></FadeIn>
     <FadeIn delay={0.25}><p style={{fontSize:22,color:"#d4af37",margin:"16px 0 0",fontWeight:700,fontFamily:"'Tajawal', sans-serif",letterSpacing:1}}>✦ الباشا معكم.. فلا خوف عليكم ✦</p></FadeIn>
     <FadeIn delay={0.35}><p style={{fontSize:18,color:"rgba(255,255,255,0.65)",margin:"20px auto 0",maxWidth:550,lineHeight:1.8}}>مؤسس نظام <strong style={{color:"#d4af37"}}>SB Model</strong> ومشروع <strong style={{color:"#d4af37"}}>X</strong><br/>مستشار وخبير في أسواق المال<br/>تداول • استثمار • ذكاء اصطناعي • دخل سلبي</p></FadeIn>
-    <FadeIn delay={0.4}><div style={{width:"100%",maxWidth:600,margin:"32px auto 0",padding:"0 0"}}><p style={{fontSize:15,color:"#d4af37",fontWeight:700,marginBottom:12,fontFamily:"'Tajawal', sans-serif",textAlign:"center"}}>🎬 تعرّف على الكوتش عمر الباشا</p><div style={{
-      position:"relative",
-      width:"100%",
-      paddingBottom:"56.25%",
-      height:0,
-      overflow:"hidden",
-      borderRadius:16,
-      border:"1px solid rgba(212,175,55,0.2)",
-      background:"#000",
-      boxShadow:"0 10px 30px rgba(0,0,0,0.5)"
-    }}>
-      <iframe
-        src="https://www.youtube.com/embed/0WQrnPqGctQ"
-        style={{
-          position:"absolute",
-          top:0,
-          left:0,
+
+    {/* ✅ الإصلاح الرئيسي: container الفيديو مع padding جانبي وoverflow:hidden */}
+    <FadeIn delay={0.4}>
+      <div style={{
+        width:"100%",
+        maxWidth:600,
+        margin:"32px auto 0",
+        padding:"0 16px",
+        boxSizing:"border-box"
+      }}>
+        <p style={{fontSize:15,color:"#d4af37",fontWeight:700,marginBottom:12,fontFamily:"'Tajawal', sans-serif",textAlign:"center"}}>🎬 تعرّف على الكوتش عمر الباشا</p>
+        {/* ✅ wrapper نسبي للـ iframe مع overflow:hidden لمنع أي تجاوز */}
+        <div style={{
+          position:"relative",
           width:"100%",
-          height:"100%",
-          border:0
-        }}
-        title="YouTube Video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </div>
-    </div>
+          paddingBottom:"56.25%",
+          height:0,
+          overflow:"hidden",
+          borderRadius:16,
+          border:"1px solid rgba(212,175,55,0.2)",
+          background:"#000",
+          boxShadow:"0 10px 30px rgba(0,0,0,0.5)"
+        }}>
+          <iframe
+            src="https://www.youtube.com/embed/0WQrnPqGctQ"
+            style={{
+              position:"absolute",
+              top:0,
+              left:0,
+              width:"100%",
+              height:"100%",
+              border:0
+            }}
+            title="YouTube Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
     </FadeIn>
+
     <FadeIn delay={0.5}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(140px, 1fr))",gap:16,margin:"40px auto",maxWidth:650}}><Stat icon="🏆" value="+2,779" label="متدرب"/><Stat icon="📅" value="+9" label="سنوات خبرة"/><Stat icon="🌍" value="+15" label="دولة عربية"/><Stat icon="⭐" value="SB" label="Model"/></div></FadeIn>
     <FadeIn delay={0.6}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:16}}><Btn primary onClick={()=>setActive("packages")}>📦 ابدأ الآن</Btn><Btn outline onClick={()=>setActive("gointel")}>🚀 استكشف GO Intel</Btn></div></FadeIn>
   </div>
@@ -84,7 +120,7 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
 
 function MarketGroup({title,color,items}){return(<div style={{marginBottom:32}}><h4 style={{fontSize:18,fontWeight:700,color:color||"#d4af37",marginBottom:16,fontFamily:"'Tajawal', sans-serif"}}>{title}</h4><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(200px, 1fr))",gap:14}}>{items.map((m,i)=>(<FadeIn key={i} delay={i*0.06}><Card gold style={{textAlign:"center",padding:"20px 16px"}}><CardImage src={m.image} height={120}/><div style={{fontSize:17,fontWeight:700,color:"#fff"}}>{m.name}</div></Card></FadeIn>))}</div></div>);}
 
-// === 1. GO Intel (الأسواق فقط) ===
+// === 1. GO Intel ===
 function GoIntel({setActive}){
   const forexMarkets=[
     {name:"Currencies",image:"/images/go intel-forex-currencies.jpg"},
@@ -118,7 +154,6 @@ function GoIntel({setActive}){
 
 // === 2. GO OS ===
 function GoOS({setActive}){
-  // تم تحديث النصوص هنا حسب الملف
   const whatItDoes=[
     "يحلل بيانات السوق والهيكل والزخم والاحتمالية في الوقت الفعلي",
     "يفلتر ضوضاء السوق ويزيل التحيز العاطفي من القرارات",
@@ -147,7 +182,7 @@ function GoOS({setActive}){
   );
 }
 
-// === 3. GO Lap (تم دمج الشروحات العربية المطلوبة) ===
+// === 3. GO Lap ===
 function GoLap({setActive}){
   const strategies=[
     {title:"Maestro",desc:"استراتيجية عالية المستوى تركز على هيكل السوق، السيولة، وتدفق المؤسسات. صممت للمتداولين الذين يريدون فهمًا كاملاً للسوق من الأعلى للأسفل، لرؤية ما يفوته الآخرون.",image:"/images/go lap-strategies-maestro.avif"},
@@ -190,7 +225,7 @@ function GoLap({setActive}){
   );
 }
 
-// === 4. GO Library (تم تحديث الوصف حسب النص) ===
+// === 4. GO Library ===
 function GoLibrary({setActive}){
   const levels=[
     {title:"Market Foundation",titleAr:"أساسيات السوق",desc:"تعلم كيف يعمل سوق الفوركس فعليًا من حسابات حركة السعر والجلسات إلى كيفية تأثير المؤسسات على الرسوم البيانية. يبني هذا الأساس الفهم والثقة المطلوبة قبل وضع صفقتك الأولى.",image:"/images/go library-market foundation.avif",items:["ما هو التداول؟","مقدمة سريعة عن عالم التداول وكيف تبدأ رحلتك"]},
@@ -250,17 +285,12 @@ function Contact(){
       <FadeIn><Card gold style={{padding:"36px 28px"}}>
         <div style={{fontSize:36,textAlign:"center",marginBottom:12}}>👤</div>
         <h4 style={{textAlign:"center",color:"#d4af37",fontSize:20,fontWeight:700,margin:"0 0 20px"}}>كوتش عمر رباح الباشا</h4>
-
-        {/* Social Icons */}
         <div style={{display:"flex",justifyContent:"center",gap:14,marginBottom:24}}>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{width:52,height:52,borderRadius:16,background:"linear-gradient(135deg, #25D366, #128C7E)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",boxShadow:"0 4px 15px rgba(37,211,102,0.3)",textDecoration:"none"}}><WhatsAppIcon size={26}/></a>
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:52,height:52,borderRadius:16,background:"linear-gradient(135deg, #2AABEE, #229ED9)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",boxShadow:"0 4px 15px rgba(42,171,238,0.3)",textDecoration:"none"}}><TelegramIcon size={26}/></a>
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:52,height:52,borderRadius:16,background:"linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",boxShadow:"0 4px 15px rgba(221,42,123,0.3)",textDecoration:"none"}}><InstagramIcon size={26}/></a>
         </div>
-
         <Btn primary full href={COACH_TELEGRAM} style={{marginBottom:24}}>💬 تواصل عبر تلجرام</Btn>
-
-        {/* Consultation Info */}
         <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:24}}>
           <h4 style={{color:"#d4af37",fontSize:17,fontWeight:700,margin:"0 0 16px",textAlign:"center",fontFamily:"'Tajawal', sans-serif"}}>📋 لحجز مكالمة استشارية مجانية (15 دقيقة)</h4>
           <p style={{fontSize:15,color:"rgba(255,255,255,0.7)",lineHeight:2,margin:"0 0 16px",textAlign:"center"}}>تواصل معي على الانستغرام وأرسل:</p>
@@ -299,7 +329,7 @@ function FAQ(){
 
 function Footer(){return(<footer style={{borderTop:"1px solid rgba(255,255,255,0.06)",padding:"40px 24px",textAlign:"center"}}><div style={{fontSize:24,marginBottom:8}}>👑</div><div style={{color:"#d4af37",fontSize:18,fontWeight:700,fontFamily:"'Tajawal', sans-serif"}}>الباشا معكم.. فلا خوف عليكم</div><div style={{display:"flex",justifyContent:"center",gap:16,marginTop:20}}><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(37,211,102,0.15)",border:"1px solid rgba(37,211,102,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#25D366",textDecoration:"none"}}><WhatsAppIcon size={22}/></a><a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(42,171,238,0.15)",border:"1px solid rgba(42,171,238,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#2AABEE",textDecoration:"none"}}><TelegramIcon size={22}/></a><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(221,42,123,0.15)",border:"1px solid rgba(221,42,123,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#DD2A7B",textDecoration:"none"}}><InstagramIcon size={22}/></a></div><div style={{color:"rgba(255,255,255,0.3)",fontSize:13,marginTop:16}}>© 2026 كوتش عمر رباح الباشا — جميع الحقوق محفوظة</div></footer>);}
 
-// === App (تم تحديث التنقل ليشمل golap) ===
+// === App ===
 function App(){
   const[active,setActive]=useState("home");
   useEffect(()=>{window.scrollTo({top:0,behavior:"smooth"});},[active]);
@@ -308,7 +338,8 @@ function App(){
     <div style={{minHeight:"100vh",background:"#0a0a0a",color:"#fff",fontFamily:"'Tajawal', sans-serif",direction:"rtl",position:"relative",overflowX:"hidden"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}body{background:#0a0a0a;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{background:#0a0a0a;overflow-x:hidden;}
         ::selection{background:rgba(212,175,55,0.3);color:#fff;}
         ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.3);border-radius:3px;}
         @keyframes shimmer{0%,100%{background-position:200% 50%;}50%{background-position:0% 50%;}}
@@ -316,10 +347,11 @@ function App(){
         @keyframes spinRing{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @media(max-width:768px){.nav-desktop{display:none !important;}.nav-mobile-toggle{display:block !important;}}
         @media(min-width:769px){.nav-mobile-menu{display:none !important;}}
-        iframe{max-width:100% !important;}
-        video{max-width:100% !important;}
-        img{max-width:110%;}
-        section{overflow:hidden;}
+
+        /* ✅ الإصلاح الجذري: منع أي عنصر من تجاوز الشاشة */
+        iframe, video, img { max-width: 100% !important; box-sizing: border-box !important; }
+        section { overflow: hidden; width: 100%; box-sizing: border-box; }
+        div { max-width: 100%; }
       `}</style>
       <AnimBG/><Nav active={active} setActive={setActive}/>
       <div style={{position:"relative",zIndex:1}}>{renderSection()}<Footer/></div>
@@ -327,6 +359,4 @@ function App(){
   );
 }
 
-// === الربط النهائي لتعمل الصفحة ===
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
-
