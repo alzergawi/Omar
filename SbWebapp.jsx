@@ -69,13 +69,14 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
       🎬 تعرّف على الكوتش عمر الباشا
     </p>
     
-   {/* بداية كود اليوتيوب المصحح */}
+   {/* بداية كود اليوتيوب - الطريقة الكلاسيكية المضمونة */}
     <div style={{
       position: "relative",
-      width: "100%",             
-      aspectRatio: "16/9",       // الحل الجذري لمشكلة القص
-      borderRadius: 16,
+      width: "100%",
+      paddingBottom: "56.25%", /* النسبة الذهبية 16:9 (9 قسمة 16 = 0.5625) */
+      height: 0,
       overflow: "hidden",
+      borderRadius: 16,
       border: "1px solid rgba(212,175,55,0.2)",
       background: "#000",
       boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
@@ -83,10 +84,12 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
       <iframe 
         src="https://www.youtube.com/embed/0WQrnPqGctQ" 
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
           width: "100%",
           height: "100%",
-          border: 0,
-          display: "block"
+          border: 0
         }}
         title="YouTube Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -267,6 +270,7 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
