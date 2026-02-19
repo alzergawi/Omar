@@ -69,11 +69,11 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
       🎬 تعرّف على الكوتش عمر الباشا
     </p>
     
-    {/* بداية كود اليوتيوب */}
-        <div style={{
+   {/* بداية كود اليوتيوب المصحح */}
+    <div style={{
       position: "relative",
-      width: "100%",             // تأكيد العرض الكامل
-      aspectRatio: "16/9",       // النسبة القياسية لليوتيوب (الحل الجذري)
+      width: "100%",             
+      aspectRatio: "16/9",       // الحل الجذري لمشكلة القص
       borderRadius: 16,
       overflow: "hidden",
       border: "1px solid rgba(212,175,55,0.2)",
@@ -86,27 +86,12 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
           width: "100%",
           height: "100%",
           border: 0,
-          display: "block" // لمنع ظهور هوامش سفلية غريبة
+          display: "block"
         }}
         title="YouTube Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
         allowFullScreen
       />
-    </div>
-      <iframe 
-  src="https://www.youtube.com/embed/0WQrnPqGctQ" 
-  style={{
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    border: 0
-  }}
-  title="YouTube Video"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowFullScreen
-/>
     </div>
     {/* نهاية كود اليوتيوب */}
 
@@ -282,6 +267,7 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
