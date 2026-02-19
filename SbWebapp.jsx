@@ -305,7 +305,7 @@ export default function App(){
         @media(min-width:769px){.nav-mobile-menu{display:none !important;}}
         iframe{max-width:100% !important;}
         video{max-width:100% !important;}
-        img{max-width:100%;}
+        img{max-width:110%;}
         section{overflow:hidden;}
       `}</style>
       <AnimBG/><Nav active={active} setActive={setActive}/>
@@ -315,5 +315,6 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
