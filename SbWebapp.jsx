@@ -81,19 +81,19 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
       boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
     }}>
       <iframe 
-        src="https://youtu.be/0WQrnPqGctQ?si=8sGeagl0B-XWJAEy" 
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          border: 0
-        }}
-        title="YouTube Video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowFullScreen
-      />
+  src="https://www.youtube.com/embed/0WQrnPqGctQ" 
+  style={{
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    border: 0
+  }}
+  title="YouTube Video"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowFullScreen
+/>
     </div>
     {/* نهاية كود اليوتيوب */}
 
@@ -269,6 +269,7 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
