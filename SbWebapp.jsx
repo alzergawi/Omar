@@ -276,10 +276,71 @@ function SuccessStories({setActive}){
   );
 }
 
+// === نافذة حجز المكالمة الاستشارية ===
+function BookingModal({onClose}){
+  const[form,setForm]=useState({name:"",age:"",country:"",program:"",phone:""});
+  const[sent,setSent]=useState(false);
+  const isValid=form.name&&form.age&&form.country&&form.program&&form.phone;
+  const inputStyle={width:"100%",background:"rgba(255,255,255,0.06)",border:"1px solid rgba(212,175,55,0.3)",borderRadius:12,padding:"12px 16px",fontSize:15,color:"#fff",fontFamily:"'Tajawal', sans-serif",outline:"none",boxSizing:"border-box",transition:"border 0.3s ease",direction:"rtl"};
+  const handleSend=()=>{
+    if(!isValid)return;
+    const msg=`📋 طلب حجز مكالمة استشارية مجانية\n\n✦ الاسم: ${form.name}\n✦ العمر: ${form.age}\n✦ الدولة: ${form.country}\n✦ البرنامج المختار: ${form.program}\n✦ رقم الهاتف: ${form.phone}`;
+    window.open(`https://t.me/omo_rabah?text=${encodeURIComponent(msg)}`,"_blank");
+    setSent(true);
+  };
+  return(
+    <div style={{position:"fixed",inset:0,zIndex:9999,background:"rgba(0,0,0,0.85)",backdropFilter:"blur(8px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px",boxSizing:"border-box"}} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div style={{background:"linear-gradient(135deg, rgba(20,20,20,0.98), rgba(30,25,10,0.98))",border:"1px solid rgba(212,175,55,0.4)",borderRadius:24,padding:"36px 28px",width:"100%",maxWidth:480,position:"relative",boxShadow:"0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,55,0.08)",direction:"rtl",maxHeight:"90vh",overflowY:"auto",boxSizing:"border-box"}}>
+        <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:"linear-gradient(90deg, transparent, #d4af37, transparent)",borderRadius:"24px 24px 0 0"}}/>
+        <button onClick={onClose} style={{position:"absolute",top:16,left:16,background:"rgba(255,255,255,0.08)",border:"none",color:"rgba(255,255,255,0.6)",fontSize:18,width:34,height:34,borderRadius:"50%",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+        {!sent?(<>
+          <div style={{textAlign:"center",marginBottom:24}}>
+            <div style={{fontSize:40,marginBottom:8}}>📋</div>
+            <h3 style={{fontSize:20,fontWeight:800,color:"#d4af37",margin:"0 0 6px",fontFamily:"'Tajawal', sans-serif"}}>حجز مكالمة استشارية مجانية</h3>
+            <p style={{fontSize:14,color:"rgba(255,255,255,0.5)",margin:0}}>15 دقيقة مع الكوتش عمر الباشا</p>
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:14}}>
+            {[
+              {key:"name",   label:"١- الاسم",                         placeholder:"أدخل اسمك الكامل",      type:"text"},
+              {key:"age",    label:"٢- العمر",                         placeholder:"أدخل عمرك",              type:"number"},
+              {key:"country",label:"٣- الدولة",                        placeholder:"الدولة التي تسكن فيها",  type:"text"},
+              {key:"program",label:"٤- البرنامج التعليمي والاستثماري", placeholder:"البرنامج الذي اخترته",   type:"text"},
+              {key:"phone",  label:"٥- رقم الهاتف",                    placeholder:"رقم الهاتف مع رمز البلد",type:"tel"},
+            ].map(({key,label,placeholder,type})=>(
+              <div key={key}>
+                <label style={{display:"block",fontSize:13,fontWeight:700,color:"#d4af37",marginBottom:6,fontFamily:"'Tajawal', sans-serif"}}>{label}</label>
+                <input type={type} placeholder={placeholder} value={form[key]}
+                  onChange={e=>setForm(p=>({...p,[key]:e.target.value}))}
+                  style={inputStyle}
+                  onFocus={e=>e.target.style.border="1px solid rgba(212,175,55,0.8)"}
+                  onBlur={e=>e.target.style.border="1px solid rgba(212,175,55,0.3)"}
+                />
+              </div>
+            ))}
+          </div>
+          <button onClick={handleSend} disabled={!isValid} style={{width:"100%",padding:"14px",borderRadius:14,border:"none",marginTop:24,background:isValid?"linear-gradient(135deg, #d4af37, #b8941f)":"rgba(212,175,55,0.2)",color:isValid?"#0a0a0a":"rgba(255,255,255,0.3)",fontSize:16,fontWeight:700,fontFamily:"'Tajawal', sans-serif",cursor:isValid?"pointer":"not-allowed",transition:"all 0.3s",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+            <TelegramIcon size={20}/> إرسال عبر تلجرام
+          </button>
+          <p style={{textAlign:"center",fontSize:12,color:"rgba(255,255,255,0.3)",marginTop:10}}>سيتم فتح تلجرام تلقائياً مع بياناتك</p>
+        </>):(
+          <div style={{textAlign:"center",padding:"20px 0"}}>
+            <div style={{fontSize:60,marginBottom:16}}>✅</div>
+            <h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",fontFamily:"'Tajawal', sans-serif",marginBottom:8}}>تم الإرسال بنجاح!</h3>
+            <p style={{fontSize:15,color:"rgba(255,255,255,0.7)",lineHeight:1.8}}>تم فتح تلجرام مع بياناتك.<br/>سيتواصل معك الكوتش عمر قريباً 🎯</p>
+            <button onClick={onClose} style={{marginTop:24,padding:"12px 32px",borderRadius:14,border:"1px solid rgba(212,175,55,0.4)",background:"transparent",color:"#d4af37",fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:"'Tajawal', sans-serif"}}>إغلاق</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // === التواصل ===
 function Contact(){
+  const[showModal,setShowModal]=useState(false);
   return(
     <section style={{padding:"80px 24px",maxWidth:700,margin:"0 auto"}}>
+      {showModal&&<BookingModal onClose={()=>setShowModal(false)}/>}
       <SectionTitle icon="📞" title="تواصل معنا" sub="نحن هنا لمساعدتك في أي وقت"/>
       <FadeIn><Card gold style={{padding:"36px 28px"}}>
         <div style={{fontSize:36,textAlign:"center",marginBottom:12}}>👤</div>
@@ -289,15 +350,12 @@ function Contact(){
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:52,height:52,borderRadius:16,background:"linear-gradient(135deg, #2AABEE, #229ED9)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",boxShadow:"0 4px 15px rgba(42,171,238,0.3)",textDecoration:"none"}}><TelegramIcon size={26}/></a>
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:52,height:52,borderRadius:16,background:"linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",boxShadow:"0 4px 15px rgba(221,42,123,0.3)",textDecoration:"none"}}><InstagramIcon size={26}/></a>
         </div>
-        <Btn primary full href={COACH_TELEGRAM} style={{marginBottom:24}}>💬 تواصل عبر تلجرام</Btn>
-        <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:24}}>
-          <h4 style={{color:"#d4af37",fontSize:17,fontWeight:700,margin:"0 0 16px",textAlign:"center",fontFamily:"'Tajawal', sans-serif"}}>📋 لحجز مكالمة استشارية مجانية (15 دقيقة)</h4>
-          <p style={{fontSize:15,color:"rgba(255,255,255,0.7)",lineHeight:2,margin:"0 0 16px",textAlign:"center"}}>تواصل معي على الانستغرام وأرسل:</p>
-          <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            {["١- اسمك","٢- عمرك","٣- الدولة يلي انت ساكن فيها","٤- البرنامج التعليمي والاستثماري يلي انت اخترته"].map((item,i)=>(<div key={i} style={{display:"flex",gap:10,alignItems:"center"}}><span style={{color:"#d4af37",fontSize:14}}>✦</span><span style={{fontSize:15,color:"rgba(255,255,255,0.8)"}}>{item}</span></div>))}
-          </div>
-          <div style={{marginTop:20}}><Btn outline full href={INSTAGRAM_URL}>📸 تواصل عبر انستغرام</Btn></div>
-        </div>
+        <Btn primary full href={COACH_TELEGRAM} style={{marginBottom:12}}>💬 تواصل عبر تلجرام</Btn>
+        <button onClick={()=>setShowModal(true)} style={{width:"100%",padding:"14px",borderRadius:14,marginTop:8,border:"1px solid rgba(212,175,55,0.5)",background:"rgba(212,175,55,0.08)",color:"#d4af37",fontSize:16,fontWeight:700,fontFamily:"'Tajawal', sans-serif",cursor:"pointer",transition:"all 0.3s ease",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}
+          onMouseEnter={e=>e.currentTarget.style.background="rgba(212,175,55,0.18)"}
+          onMouseLeave={e=>e.currentTarget.style.background="rgba(212,175,55,0.08)"}>
+          📋 احجز مكالمة استشارية مجانية
+        </button>
       </Card></FadeIn>
     </section>
   );
