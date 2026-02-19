@@ -33,16 +33,20 @@ function CardImage({src,height=160,radius=14}){return(<div style={{width:"100%",
 
 function DetailCard({icon,title,desc,items,color="#d4af37",image}){const[open,setOpen]=useState(false);return(<Card onClick={()=>setOpen(!open)} style={{cursor:"pointer"}}>{image&&open&&<CardImage src={image} height={140}/>}<div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}><div style={{display:"flex",gap:12,alignItems:"center"}}>{icon&&<span style={{fontSize:28}}>{icon}</span>}<div><h4 style={{fontSize:17,fontWeight:700,color,margin:0,fontFamily:"'Tajawal', sans-serif"}}>{title}</h4>{desc&&<p style={{fontSize:13,color:"rgba(255,255,255,0.5)",margin:"4px 0 0"}}>{desc}</p>}</div></div><span style={{color,fontSize:20,transition:"transform 0.3s",transform:open?"rotate(45deg)":"rotate(0)",flexShrink:0}}>+</span></div>{open&&items&&(<div style={{marginTop:16,paddingTop:12,borderTop:"1px solid rgba(255,255,255,0.08)"}}>{items.map((item,i)=>(<div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8}}><span style={{color,flexShrink:0,fontSize:12,marginTop:3}}>◆</span><span style={{fontSize:14,color:"rgba(255,255,255,0.75)",lineHeight:1.7}}>{item}</span></div>))}</div>)}</Card>);}
 
-// === النافبار ===
-function Nav({active,setActive}){const[open,setOpen]=useState(false);const[scrolled,setScrolled]=useState(false);useEffect(()=>{const fn=()=>setScrolled(window.scrollY>50);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);const items=[{id:"home",label:"الرئيسية"},{id:"gointel",label:"GO Intel"},{id:"goos",label:"GO OS"},{id:"golibrary",label:"GO Library"},{id:"packages",label:"الباقات"},{id:"success",label:"قصص النجاح"},{id:"contact",label:"تواصل"}];return(<nav style={{position:"fixed",top:0,left:0,right:0,zIndex:1000,background:scrolled?"rgba(10,10,10,0.95)":"rgba(10,10,10,0.7)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.06)",transition:"all 0.3s ease"}}><div style={{maxWidth:1200,margin:"0 auto",padding:"0 24px",display:"flex",alignItems:"center",justifyContent:"space-between",height:64}}><div style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}} onClick={()=>{setActive("home");window.scrollTo({top:0,behavior:"smooth"});}}><span style={{fontSize:28}}>👑</span><span style={{fontSize:20,fontWeight:800,color:"#d4af37",fontFamily:"'Tajawal', sans-serif"}}>الباشا</span></div><div style={{display:"flex",gap:8,alignItems:"center"}} className="nav-desktop">{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"8px 16px",borderRadius:10,cursor:"pointer",fontSize:14,fontWeight:600,fontFamily:"'Tajawal', sans-serif",transition:"all 0.3s ease"}}>{it.label}</button>))}</div><button className="nav-mobile-toggle" onClick={()=>setOpen(!open)} style={{background:"none",border:"none",color:"#d4af37",fontSize:24,cursor:"pointer",display:"none"}}>{open?"✕":"☰"}</button></div>{open&&(<div className="nav-mobile-menu" style={{padding:"8px 24px 20px",display:"flex",flexDirection:"column",gap:4,borderTop:"1px solid rgba(255,255,255,0.06)"}}>{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"12px 16px",borderRadius:10,cursor:"pointer",fontSize:15,fontWeight:600,fontFamily:"'Tajawal', sans-serif",textAlign:"right",transition:"all 0.3s ease"}}>{it.label}</button>))}</div>)}</nav>);}
+// === النافبار (تم تحديث الأقسام) ===
+function Nav({active,setActive}){
+  const[open,setOpen]=useState(false);
+  const[scrolled,setScrolled]=useState(false);
+  useEffect(()=>{const fn=()=>setScrolled(window.scrollY>50);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
+  // تمت إضافة golap هنا
+  const items=[{id:"home",label:"الرئيسية"},{id:"gointel",label:"GO Intel"},{id:"goos",label:"GO OS"},{id:"golap",label:"GO Lap"},{id:"golibrary",label:"GO Library"},{id:"packages",label:"الباقات"},{id:"success",label:"قصص النجاح"},{id:"contact",label:"تواصل"}];
+  return(<nav style={{position:"fixed",top:0,left:0,right:0,zIndex:1000,background:scrolled?"rgba(10,10,10,0.95)":"rgba(10,10,10,0.7)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.06)",transition:"all 0.3s ease"}}><div style={{maxWidth:1200,margin:"0 auto",padding:"0 24px",display:"flex",alignItems:"center",justifyContent:"space-between",height:64}}><div style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}} onClick={()=>{setActive("home");window.scrollTo({top:0,behavior:"smooth"});}}><span style={{fontSize:28}}>👑</span><span style={{fontSize:20,fontWeight:800,color:"#d4af37",fontFamily:"'Tajawal', sans-serif"}}>الباشا</span></div><div style={{display:"flex",gap:8,alignItems:"center"}} className="nav-desktop">{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"8px 16px",borderRadius:10,cursor:"pointer",fontSize:14,fontWeight:600,fontFamily:"'Tajawal', sans-serif",transition:"all 0.3s ease"}}>{it.label}</button>))}</div><button className="nav-mobile-toggle" onClick={()=>setOpen(!open)} style={{background:"none",border:"none",color:"#d4af37",fontSize:24,cursor:"pointer",display:"none"}}>{open?"✕":"☰"}</button></div>{open&&(<div className="nav-mobile-menu" style={{padding:"8px 24px 20px",display:"flex",flexDirection:"column",gap:4,borderTop:"1px solid rgba(255,255,255,0.06)"}}>{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"12px 16px",borderRadius:10,cursor:"pointer",fontSize:15,fontWeight:600,fontFamily:"'Tajawal', sans-serif",textAlign:"right",transition:"all 0.3s ease"}}>{it.label}</button>))}</div>)}</nav>);
+}
 
 // === Hero ===
 function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"100px 24px 60px",position:"relative"}}>
-  {/* لم يتم ذكر صورة بانر الهيرو في القائمة، تركت الاسم القديم. يمكنك استبداله إذا كان لديك صورة أخرى */}
   <FadeIn style={{width:"100%",maxWidth:900,marginBottom:40}}><div style={{borderRadius:24,overflow:"hidden",border:"1px solid rgba(212,175,55,0.3)",boxShadow:"0 20px 80px rgba(212,175,55,0.1)"}}><img src="/images/hero-banner.jpg" alt="الباشا" style={{width:"100%",display:"block"}} onError={(e)=>{e.target.parentElement.parentElement.style.display="none";}}/></div></FadeIn>
-  
   <FadeIn><div style={{width:180,height:180,borderRadius:"50%",overflow:"hidden",border:"4px solid rgba(212,175,55,0.6)",boxShadow:"0 0 60px rgba(212,175,55,0.2), 0 0 120px rgba(212,175,55,0.08)",margin:"0 auto 32px",background:"linear-gradient(135deg, rgba(212,175,55,0.2), rgba(10,10,10,0.9))",position:"relative"}}><img src="/images/coach-profile.webp" alt="كوتش عمر رباح الباشا" style={{width:"110%",height:"110%",objectFit:"cover",display:"block",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%, -50%)"}} onError={(e)=>{e.target.style.display="none";}}/><div style={{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid transparent",borderTopColor:"#d4af37",borderBottomColor:"#d4af37",animation:"spinRing 8s linear infinite",pointerEvents:"none"}}/></div></FadeIn>
-
   <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1}}>
     <FadeIn delay={0.05}><Badge>🇫🇷 رائد أعمال في فرنسا</Badge></FadeIn>
     <FadeIn delay={0.15}><h1 style={{fontSize:"clamp(36px, 7vw, 64px)",fontWeight:900,lineHeight:1.15,margin:"24px 0 0",fontFamily:"'Tajawal', sans-serif",background:"linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundSize:"200% 200%",animation:"shimmer 4s ease infinite"}}>كوتش عمر رباح الباشا</h1></FadeIn>
@@ -56,9 +60,8 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
 
 function MarketGroup({title,color,items}){return(<div style={{marginBottom:32}}><h4 style={{fontSize:18,fontWeight:700,color:color||"#d4af37",marginBottom:16,fontFamily:"'Tajawal', sans-serif"}}>{title}</h4><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(200px, 1fr))",gap:14}}>{items.map((m,i)=>(<FadeIn key={i} delay={i*0.06}><Card gold style={{textAlign:"center",padding:"20px 16px"}}><CardImage src={m.image} height={120}/><div style={{fontSize:17,fontWeight:700,color:"#fff"}}>{m.name}</div></Card></FadeIn>))}</div></div>);}
 
-// === GO Intel ===
+// === 1. GO Intel (الأسواق فقط) ===
 function GoIntel({setActive}){
-  // === تم تحديث الأسماء لتطابق قائمتك بالضبط (jpg) ===
   const forexMarkets=[
     {name:"Currencies",image:"/images/go intel-forex-currencies.jpg"},
     {name:"Forex",image:"/images/go intel-forex-forex.jpg"},
@@ -76,47 +79,22 @@ function GoIntel({setActive}){
     {name:"CFD",image:"/images/go intel-crypto-cfd.jpg"}
   ];
 
-  // === تم تحديث الاستراتيجيات لتطابق قائمتك (avif) ===
-  const strategies=[
-    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-strategies-maestro.avif",items:["استراتيجية متقدمة تركّز على هيكل السوق والسيولة والتدفق المؤسسي","مصممة للمتداولين الذين يريدون فهماً شاملاً من أعلى لأسفل","تحليل كامل للسوق بنظرة واحدة"]},
-    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-strategies-seeker.avif",items:["استراتيجية دقيقة مصممة لتحديد أفضل نقاط الدخول","مبنية على الصبر والوضوح والتنفيذ المنضبط","حركة ذكية ومحسوبة وثابتة"]},
-    {icon:"🏛️",title:"SMC",desc:"تداول بمنطق المؤسسات",image:"/images/go lap-strategies-smc.avif",items:["تحليل كيف تحرّك المؤسسات السعر عبر السيولة وعدم التوازن وهيكل السوق","يركّز على الدقة والصبر والتداول متوافقاً مع السلوك المؤسسي","بديل عن المؤشرات التقليدية للتجزئة"]},
-    {icon:"⚡",title:"Strike 90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-strategies-strike90.avif",items:["استراتيجية تنفيذ مبنية على الوقت","مصممة لاستغلال أكثر نافذة سيولة وتقلباً في جلسة نيويورك","أول 90 دقيقة بعد افتتاح السوق"]},
-    {icon:"📊",title:"Technical Analysis",desc:"وضوح تقني في حركة السوق",image:"/images/go lap-strategies-technical analysis.avif",items:["نهج منظم لدراسة سلوك السعر باستخدام أنماط الرسوم البيانية والترندات","الدعم والمقاومة والزخم","يساعد المتداولين على تحديد اتجاه السوق ونقاط الدخول ومستويات المخاطر"]},
-  ];
-
-  // === تم تحديث المؤشرات لتطابق قائمتك (avif) ===
-  const indicators=[
-    {icon:"🛡️",title:"Defender",desc:"احمِ ما تكسبه",image:"/images/go lap-indicators-defender.avif",items:["مصمم لحماية رأس مالك من خلال وعي منضبط بالمخاطر","يدعم اتخاذ القرارات البطيئة والدقيقة","يحمي المتداولين في ظروف السوق المتقلبة"]},
-    {icon:"🏹",title:"Hunter",desc:"اضرب بنيّة",image:"/images/go lap-indicators-hunter.avif",items:["مبني للمتداولين الحاسمين الباحثين عن فرص سكالبينج مبنية على الزخم","يحدد تحركات السوق عالية الطاقة","تنفيذ بسرعة وثقة وهيكلية"]},
-    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-indicators-maestro.avif",items:["يقدم رؤى سوقية متقدمة عبر إبراز الهيكل والزخم والمناطق الرئيسية","مصمم لمساعدتك على إدراك ما يغفله الآخرون","تحكم كامل في تدفق السوق باستخدام نطاق افتتاح 6 مساءً"]},
-    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-indicators-seeker.avif",items:["يمسح السوق لتحديد نقاط دخول عالية الاحتمالية لمناطق القنص","مبني للصبر والدقة","يدعم المتداولين الذين يتحركون بذكاء وثبات"]},
-    {icon:"⚡",title:"Strike90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-indicators-strike90.avif",items:["منطقة ضربة عالية الاحتمالية","توقيت مثالي للدخول","نظام ثقة مبني على البيانات","أداء مُثبت ومُختبر"]},
-  ];
-
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle icon="📊" title="GO Intel" sub="معلومات تداول فورية عبر الأسواق الرئيسية"/>
-      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO INTEL</strong> يقدم معلومات تداول فورية عبر الأسواق الرئيسية<br/>بدلاً من مطاردة الرسوم البيانية طوال اليوم، يحصل الأعضاء على<br/><strong style={{color:"#d4af37"}}>سياق سوقي واضح</strong> و<strong style={{color:"#d4af37"}}>رؤى قابلة للتنفيذ</strong><br/>يعرفون ما يهم ومتى يهم</p></Card></FadeIn>
+      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO INTEL</strong> يقدم معلومات تداول فورية عبر الأسواق الرئيسية<br/>يعرفون ما يهم ومتى يهم</p></Card></FadeIn>
       <FadeIn><h3 style={{textAlign:"center",fontSize:24,fontWeight:800,color:"#d4af37",margin:"0 0 24px",fontFamily:"'Tajawal', sans-serif"}}>🌐 الأسواق المدعومة</h3></FadeIn>
       <MarketGroup title="💱 Forex" color="#60a5fa" items={forexMarkets}/>
       <MarketGroup title="📈 Stocks" color="#c084fc" items={stockMarkets}/>
       <MarketGroup title="🪙 Crypto" color="#fbbf24" items={cryptoMarkets}/>
-
-      <FadeIn delay={0.1}><h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8,marginTop:32}}>⚔️ الاستراتيجيات</h3><p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>استراتيجيات التداول المتقدمة</p></FadeIn>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16,marginBottom:48}}>{strategies.map((s,i)=>(<FadeIn key={i} delay={0.15+i*0.06}><DetailCard icon={s.icon} title={s.title} desc={s.desc} items={s.items} image={s.image}/></FadeIn>))}</div>
-
-      <FadeIn delay={0.2}><h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8}}>📡 المؤشرات</h3><p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>المؤشرات الذكية</p></FadeIn>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16}}>{indicators.map((ind,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><DetailCard icon={ind.icon} title={ind.title} desc={ind.desc} items={ind.items} image={ind.image} color="#a78bfa"/></FadeIn>))}</div>
-      <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اختر باقتك الآن</Btn></div></FadeIn>
+      <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("golap")}>💻 انتقل إلى GO Lap</Btn></div></FadeIn>
     </section>
   );
 }
 
-// === GO OS ===
+// === 2. GO OS ===
 function GoOS({setActive}){
   const whatItDoes=["يحلل بيانات السوق والهيكل والزخم والاحتمالية في الوقت الفعلي","يفلتر ضوضاء السوق ويزيل التحيز العاطفي من القرارات","يُشغّل جميع تنبيهات ورؤى وأدوات وطبقات ذكاء GO","يعمل كنظام تشغيل تداول شخصي — وليس مجرد تغذية إشارات عامة"];
-  // === تم تحديث الأسماء (jpg) ===
   const features=[
     {icon:"🧠",title:"ذكاء تداول شخصي",image:"/images/go os-Personalized Trading Intelligence.jpg",desc:"كل تجربة مخصصة — يتكيّف GO OS حسب أهدافك الشخصية."},
     {icon:"📡",title:"إشارات مبنية على الذكاء",image:"/images/go os-Intelligence-Based Signals.jpg",desc:"الإشارات تُولّد من نماذج ذكاء حية وليس قواعد ثابتة."},
@@ -129,7 +107,7 @@ function GoOS({setActive}){
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle icon="🤖" title="GO OS" sub="نظام التشغيل الذكي في قلب منظومة GO"/>
-      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO OS</strong> هو نظام التشغيل الذكي في قلب منظومة GO بالكامل<br/>يعمل كالعقل الذي يربط البيانات والاستراتيجية والسلوك والنتائج — يحوّل التعقيد إلى <strong style={{color:"#d4af37"}}>وضوح في الوقت الفعلي</strong><br/><br/>GO OS لا يقرأ الأسواق فقط — بل يفهم السياق، يتكيّف مع المستخدم، ويتطور مع كل تفاعل<br/>هنا تتحول المعلومات الخام إلى <strong style={{color:"#d4af37"}}>قرارات واثقة مدفوعة بالنظام</strong></p></Card></FadeIn>
+      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO OS</strong> هو نظام التشغيل الذكي في قلب منظومة GO بالكامل<br/>يحوّل التعقيد إلى <strong style={{color:"#d4af37"}}>وضوح في الوقت الفعلي</strong></p></Card></FadeIn>
       <FadeIn delay={0.1}><Card style={{marginBottom:40,padding:"32px 28px"}}><h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",margin:"0 0 20px",fontFamily:"'Tajawal', sans-serif"}}>ماذا يفعل GO OS</h3><div style={{display:"flex",flexDirection:"column",gap:12}}>{whatItDoes.map((item,i)=>(<div key={i} style={{display:"flex",gap:10,alignItems:"flex-start"}}><span style={{color:"#d4af37",flexShrink:0,marginTop:2}}>✦</span><span style={{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.7}}>{item}</span></div>))}</div></Card></FadeIn>
       <FadeIn delay={0.2}><h3 style={{textAlign:"center",fontSize:24,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:28}}>⚡ المميزات الأساسية</h3></FadeIn>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:20}}>{features.map((f,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><Card style={{height:"100%"}}><CardImage src={f.image} height={160}/><div style={{fontSize:40,marginBottom:12}}>{f.icon}</div><h4 style={{fontSize:18,fontWeight:700,color:"#d4af37",margin:"0 0 8px",fontFamily:"'Tajawal', sans-serif"}}>{f.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0,lineHeight:1.8}}>{f.desc}</p></Card></FadeIn>))}</div>
@@ -138,9 +116,52 @@ function GoOS({setActive}){
   );
 }
 
-// === GO Library ===
+// === 3. GO Lap (القسم الجديد المستقل) ===
+function GoLap({setActive}){
+  // === هنا الصور التي أرسلتها بصيغة avif والمسافات ===
+  const strategies=[
+    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-strategies-maestro.avif",items:["استراتيجية متقدمة تركّز على هيكل السوق والسيولة","تحليل كامل للسوق بنظرة واحدة"]},
+    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-strategies-seeker.avif",items:["استراتيجية دقيقة مصممة لتحديد أفضل نقاط الدخول","حركة ذكية ومحسوبة وثابتة"]},
+    {icon:"🏛️",title:"SMC",desc:"تداول بمنطق المؤسسات",image:"/images/go lap-strategies-smc.avif",items:["تحليل كيف تحرّك المؤسسات السعر","بديل عن المؤشرات التقليدية للتجزئة"]},
+    {icon:"⚡",title:"Strike 90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-strategies-strike90.avif",items:["استراتيجية تنفيذ مبنية على الوقت","أول 90 دقيقة بعد افتتاح السوق"]},
+    {icon:"📊",title:"Technical Analysis",desc:"وضوح تقني في حركة السوق",image:"/images/go lap-strategies-technical analysis.avif",items:["نهج منظم لدراسة سلوك السعر","الدعم والمقاومة والزخم"]},
+  ];
+
+  const indicators=[
+    {icon:"🛡️",title:"Defender",desc:"احمِ ما تكسبه",image:"/images/go lap-indicators-defender.avif",items:["مصمم لحماية رأس مالك من خلال وعي منضبط بالمخاطر"]},
+    {icon:"🏹",title:"Hunter",desc:"اضرب بنيّة",image:"/images/go lap-indicators-hunter.avif",items:["مبني للمتداولين الحاسمين","فرص سكالبينج مبنية على الزخم"]},
+    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-indicators-maestro.avif",items:["يقدم رؤى سوقية متقدمة عبر إبراز الهيكل والزخم"]},
+    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-indicators-seeker.avif",items:["يمسح السوق لتحديد نقاط دخول عالية الاحتمالية"]},
+    {icon:"⚡",title:"Strike90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-indicators-strike90.avif",items:["منطقة ضربة عالية الاحتمالية","نظام ثقة مبني على البيانات"]},
+  ];
+
+  return(
+    <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
+      <SectionTitle icon="💻" title="GO Lap" sub="أدوات ومؤشرات واستراتيجيات متقدمة"/>
+      
+      <FadeIn delay={0.1}>
+        <h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8,marginTop:32}}>⚔️ الاستراتيجيات</h3>
+        <p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>استراتيجيات التداول المتقدمة</p>
+      </FadeIn>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16,marginBottom:48}}>
+        {strategies.map((s,i)=>(<FadeIn key={i} delay={0.15+i*0.06}><DetailCard icon={s.icon} title={s.title} desc={s.desc} items={s.items} image={s.image}/></FadeIn>))}
+      </div>
+
+      <FadeIn delay={0.2}>
+        <h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8}}>📡 المؤشرات</h3>
+        <p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>المؤشرات الذكية</p>
+      </FadeIn>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16}}>
+        {indicators.map((ind,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><DetailCard icon={ind.icon} title={ind.title} desc={ind.desc} items={ind.items} image={ind.image} color="#a78bfa"/></FadeIn>))}
+      </div>
+      
+      <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اشترك للوصول</Btn></div></FadeIn>
+    </section>
+  );
+}
+
+// === 4. GO Library ===
 function GoLibrary({setActive}){
-  // === تم تحديث الأسماء (avif) ===
   const levels=[
     {title:"أساسيات السوق",titleEn:"Market Foundation",desc:"تعلّم كيف يعمل سوق الفوركس فعلاً.",image:"/images/go library-market foundation.avif",items:["ما هو التداول؟","مقدمة سريعة عن عالم التداول وكيف تبدأ رحلتك"]},
     {title:"الأساسيات التطبيقية",titleEn:"Applied Foundation",desc:"خذ المفاهيم الأساسية وطبّقها في ظروف السوق الحقيقية.",image:"/images/go library-applied foundation-forex basics.avif",items:["أساسيات الفوركس — تعلّم أساسيات تداول الفوركس","أساسيات الأسهم — تعلّم أساسيات الأسهم","أساسيات الكريبتو — تعلّم أساسيات العملات الرقمية"]},
@@ -149,7 +170,6 @@ function GoLibrary({setActive}){
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle icon="📚" title="GO Library" sub="مكتبة معرفية رقمية شاملة لرفع مستوى الوعي والمعرفة"/>
-      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}>مكتبة معرفية رقمية شاملة تهدف إلى رفع مستوى الوعي والمعرفة لدى المتداولين في الأسواق المالية<br/>يوفر محتوى منظماً يجمع بين <strong style={{color:"#d4af37"}}>التعليم النظري والتطبيق العملي</strong><br/>مع التركيز على مفاهيم التداول الحديثة المدعومة بالتحليل والبيانات</p></Card></FadeIn>
       <div style={{display:"flex",flexDirection:"column",gap:24}}>{levels.map((lvl,i)=>(<FadeIn key={i} delay={i*0.1}><Card style={{padding:"32px 28px"}}><CardImage src={lvl.image} height={180}/><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}><h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",margin:0,fontFamily:"'Tajawal', sans-serif"}}>{lvl.title}</h3><Badge>{lvl.titleEn}</Badge></div><p style={{fontSize:15,color:"rgba(255,255,255,0.75)",lineHeight:1.8,margin:"0 0 16px"}}>{lvl.desc}</p>{lvl.items.map((item,j)=>(<div key={j} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8}}><span style={{color:"#d4af37",flexShrink:0,fontSize:12,marginTop:3}}>◆</span><span style={{fontSize:14,color:"rgba(255,255,255,0.65)",lineHeight:1.7}}>{item}</span></div>))}</Card></FadeIn>))}</div>
       <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اشترك للوصول</Btn></div></FadeIn>
     </section>
@@ -176,7 +196,6 @@ function Packages(){
 
 // === قصص النجاح ===
 function SuccessStories({setActive}){
-  // === تم تحديث الأسماء (MP4 capital letters) ===
   const stories=[
     {flag:"🇮🇶",name:"متدرب مرتضى من العراق",text:"بدأ بمبلغ 21$ وخلال 27 يوم وصل إلى 3,000$ وسحب 2 مليون دينار عراقي",highlight:"21$ → 3,000$",video:"/videos/success-murtaza.MP4"},
     {flag:"🏅",name:"مدرب في مشروع X",text:"قبل ما يدخل معي كان خسران 20,000$ والآن حقق 400,000$ خلال 30 يوم فقط!",highlight:"20K$ → 400K$",video:"/videos/success-projectx-trainer.MP4"},
@@ -250,10 +269,11 @@ function FAQ(){
 
 function Footer(){return(<footer style={{borderTop:"1px solid rgba(255,255,255,0.06)",padding:"40px 24px",textAlign:"center"}}><div style={{fontSize:24,marginBottom:8}}>👑</div><div style={{color:"#d4af37",fontSize:18,fontWeight:700,fontFamily:"'Tajawal', sans-serif"}}>الباشا معكم.. فلا خوف عليكم</div><div style={{display:"flex",justifyContent:"center",gap:16,marginTop:20}}><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(37,211,102,0.15)",border:"1px solid rgba(37,211,102,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#25D366",textDecoration:"none"}}><WhatsAppIcon size={22}/></a><a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(42,171,238,0.15)",border:"1px solid rgba(42,171,238,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#2AABEE",textDecoration:"none"}}><TelegramIcon size={22}/></a><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" style={{width:44,height:44,borderRadius:12,background:"rgba(221,42,123,0.15)",border:"1px solid rgba(221,42,123,0.3)",display:"flex",alignItems:"center",justifyContent:"center",color:"#DD2A7B",textDecoration:"none"}}><InstagramIcon size={22}/></a></div><div style={{color:"rgba(255,255,255,0.3)",fontSize:13,marginTop:16}}>© 2026 كوتش عمر رباح الباشا — جميع الحقوق محفوظة</div></footer>);}
 
+// === App (تم تحديث التنقل ليشمل golap) ===
 function App(){
   const[active,setActive]=useState("home");
   useEffect(()=>{window.scrollTo({top:0,behavior:"smooth"});},[active]);
-  const renderSection=()=>{switch(active){case"gointel":return<GoIntel setActive={setActive}/>;case"goos":return<GoOS setActive={setActive}/>;case"golibrary":return<GoLibrary setActive={setActive}/>;case"packages":return<Packages/>;case"success":return<SuccessStories setActive={setActive}/>;case"contact":return<Contact/>;default:return(<><Hero setActive={setActive}/><GoIntel setActive={setActive}/><GoOS setActive={setActive}/><GoLibrary setActive={setActive}/><Packages/><SuccessStories setActive={setActive}/><FAQ/><Contact/></>);}};
+  const renderSection=()=>{switch(active){case"gointel":return<GoIntel setActive={setActive}/>;case"goos":return<GoOS setActive={setActive}/>;case"golap":return<GoLap setActive={setActive}/>;case"golibrary":return<GoLibrary setActive={setActive}/>;case"packages":return<Packages/>;case"success":return<SuccessStories setActive={setActive}/>;case"contact":return<Contact/>;default:return(<><Hero setActive={setActive}/><GoIntel setActive={setActive}/><GoOS setActive={setActive}/><GoLap setActive={setActive}/><GoLibrary setActive={setActive}/><Packages/><SuccessStories setActive={setActive}/><FAQ/><Contact/></>);}};
   return(
     <div style={{minHeight:"100vh",background:"#0a0a0a",color:"#fff",fontFamily:"'Tajawal', sans-serif",direction:"rtl",position:"relative",overflowX:"hidden"}}>
       <style>{`
