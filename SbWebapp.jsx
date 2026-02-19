@@ -56,7 +56,7 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
   <FadeIn style={{width:"100%",maxWidth:900,marginBottom:40}}><div style={{borderRadius:24,overflow:"hidden",border:"1px solid rgba(212,175,55,0.3)",boxShadow:"0 20px 80px rgba(212,175,55,0.1)"}}><img src="/images/hero-banner.jpg" alt="الباشا" style={{width:"100%",display:"block"}} onError={(e)=>{e.target.parentElement.parentElement.style.display="none";}}/></div></FadeIn>
 
   {/* Circular Profile */}
-  <FadeIn><div style={{width:180,height:180,borderRadius:"50%",overflow:"hidden",border:"4px solid rgba(212,175,55,0.6)",boxShadow:"0 0 60px rgba(212,175,55,0.2), 0 0 120px rgba(212,175,55,0.08)",margin:"0 auto 32px",background:"linear-gradient(135deg, rgba(212,175,55,0.2), rgba(10,10,10,0.9))",position:"relative"}}><img src="/images/coach-profile.webp" alt="كوتش عمر رباح الباشا" style={{width:"110%",height:"110%",objectFit:"cover",display:"block",position:"absolute",top:"-5%",left:"0%"}} onError={(e)=>{e.target.style.display="none";}}/><div style={{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid transparent",borderTopColor:"#d4af37",borderBottomColor:"#d4af37",animation:"spinRing 8s linear infinite",pointerEvents:"none"}}/></div></FadeIn>
+  <FadeIn><div style={{width:180,height:180,borderRadius:"50%",overflow:"hidden",border:"4px solid rgba(212,175,55,0.6)",boxShadow:"0 0 60px rgba(212,175,55,0.2), 0 0 120px rgba(212,175,55,0.08)",margin:"0 auto 32px",background:"linear-gradient(135deg, rgba(212,175,55,0.2), rgba(10,10,10,0.9))",position:"relative"}}><img src="/images/coach-profile.webp" alt="كوتش عمر رباح الباشا" style={{width:"120%",height:"120%",objectFit:"cover",display:"block",position:"absolute",top:"0%",left:"0%"}} onError={(e)=>{e.target.style.display="none";}}/><div style={{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid transparent",borderTopColor:"#d4af37",borderBottomColor:"#d4af37",animation:"spinRing 8s linear infinite",pointerEvents:"none"}}/></div></FadeIn>
 
   <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1}}>
     <FadeIn delay={0.05}><Badge>🇫🇷 رائد أعمال في فرنسا</Badge></FadeIn>
@@ -315,5 +315,6 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
