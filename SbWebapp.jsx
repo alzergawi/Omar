@@ -25,8 +25,7 @@ function Badge({children,color="#d4af37"}){return(<span style={{display:"inline-
 
 function Stat({value,label,icon}){return(<div style={{textAlign:"center",padding:"20px 12px"}}><div style={{fontSize:36,marginBottom:4}}>{icon}</div><div style={{fontSize:32,fontWeight:800,color:"#d4af37",fontFamily:"'Tajawal', sans-serif",lineHeight:1.2}}>{value}</div><div style={{fontSize:14,color:"rgba(255,255,255,0.6)",marginTop:4}}>{label}</div></div>);}
 
-// === تم حذف الأيقونة من عنوان القسم ===
-function SectionTitle({title,sub}){return(<div style={{textAlign:"center",marginBottom:48}}><h2 style={{fontSize:32,fontWeight:800,color:"#fff",margin:"0 0 12px",fontFamily:"'Tajawal', sans-serif"}}>{title}</h2>{sub&&<p style={{fontSize:16,color:"rgba(255,255,255,0.5)",margin:0,maxWidth:500,marginInline:"auto"}}>{sub}</p>}<div style={{width:60,height:3,background:"linear-gradient(90deg, #d4af37, transparent)",margin:"16px auto 0",borderRadius:2}}/></div>);}
+function SectionTitle({title,sub}){return(<div style={{textAlign:"center",marginBottom:48}}><h2 style={{fontSize:32,fontWeight:800,color:"#fff",margin:"0 0 12px",fontFamily:"'Tajawal', sans-serif"}}>{title}</h2>{sub&&<p style={{fontSize:16,color:"rgba(255,255,255,0.5)",margin:0,maxWidth:600,marginInline:"auto",lineHeight:1.6}}>{sub}</p>}<div style={{width:60,height:3,background:"linear-gradient(90deg, #d4af37, transparent)",margin:"16px auto 0",borderRadius:2}}/></div>);}
 
 function VideoPlayer({src,style={}}){const[playing,setPlaying]=useState(false);const videoRef=useRef(null);const handlePlay=()=>{if(videoRef.current){if(playing){videoRef.current.pause();}else{videoRef.current.play();}setPlaying(!playing);}};return(<div style={{position:"relative",borderRadius:16,overflow:"hidden",border:"1px solid rgba(212,175,55,0.2)",background:"#000",cursor:"pointer",...style}} onClick={handlePlay}><video ref={videoRef} src={src} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onEnded={()=>setPlaying(false)} onError={(e)=>{e.target.style.display="none";}} playsInline preload="metadata"/>{!playing&&(<div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.4)"}}><div style={{width:64,height:64,borderRadius:"50%",background:"rgba(212,175,55,0.9)",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 8px 30px rgba(212,175,55,0.4)"}}><div style={{width:0,height:0,borderTop:"12px solid transparent",borderBottom:"12px solid transparent",borderLeft:"20px solid #0a0a0a",marginLeft:4}}/></div></div>)}</div>);}
 
@@ -80,7 +79,7 @@ function GoIntel({setActive}){
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle title="GO Intel" sub="معلومات تداول فورية عبر الأسواق الرئيسية"/>
-      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO INTEL</strong> يقدم معلومات تداول فورية عبر الأسواق الرئيسية<br/>يعرفون ما يهم ومتى يهم</p></Card></FadeIn>
+      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO INTEL</strong> تقدم معلومات تداول فورية عبر الأسواق الرئيسية.<br/>بدلاً من مطاردة الشارتات طوال اليوم، يحصل الأعضاء على سياق سوق واضح ورؤى قابلة للتنفيذ ليعرفوا ما يهم ومتى يهم.</p></Card></FadeIn>
       <FadeIn><h3 style={{textAlign:"center",fontSize:24,fontWeight:800,color:"#d4af37",margin:"0 0 24px",fontFamily:"'Tajawal', sans-serif"}}>🌐 الأسواق المدعومة</h3></FadeIn>
       <MarketGroup title="💱 Forex" color="#60a5fa" items={forexMarkets}/>
       <MarketGroup title="📈 Stocks" color="#c084fc" items={stockMarkets}/>
@@ -92,45 +91,51 @@ function GoIntel({setActive}){
 
 // === 2. GO OS ===
 function GoOS({setActive}){
-  const whatItDoes=["يحلل بيانات السوق والهيكل والزخم والاحتمالية في الوقت الفعلي","يفلتر ضوضاء السوق ويزيل التحيز العاطفي من القرارات","يُشغّل جميع تنبيهات ورؤى وأدوات وطبقات ذكاء GO","يعمل كنظام تشغيل تداول شخصي — وليس مجرد تغذية إشارات عامة"];
-  // تم حذف الأيقونات من هنا
+  // تم تحديث النصوص هنا حسب الملف
+  const whatItDoes=[
+    "يحلل بيانات السوق والهيكل والزخم والاحتمالية في الوقت الفعلي",
+    "يفلتر ضوضاء السوق ويزيل التحيز العاطفي من القرارات",
+    "يُشغّل جميع تنبيهات ورؤى وأدوات وطبقات ذكاء GO",
+    "يعمل كنظام تشغيل تداول شخصي — وليس مجرد تغذية إشارات عامة"
+  ];
+  
   const features=[
-    {title:"ذكاء تداول شخصي",image:"/images/go os-Personalized Trading Intelligence.jpg",desc:"كل تجربة مخصصة — يتكيّف GO OS حسب أهدافك الشخصية."},
-    {title:"إشارات مبنية على الذكاء",image:"/images/go os-Intelligence-Based Signals.jpg",desc:"الإشارات تُولّد من نماذج ذكاء حية وليس قواعد ثابتة."},
-    {title:"محرك الاستراتيجيات",image:"/images/go os-Strategy Code Engine.jpg",desc:"منطق استراتيجي متقدم يعمل تحت الواجهة."},
-    {title:"تحليل الشارت بالصور",image:"/images/go os-Screenshot & Chart Analysis.jpg",desc:"ارفع صورة شارت أو لقطة شاشة — GO OS يحللها."},
-    {title:"تتبع الأداء الحي",image:"/images/go os-Real-Time Performance Tracking.jpg",desc:"يتتبع كل إشارة وتفاعل — نسب الربح/الخسارة."},
-    {title:"أخبار وبيانات فورية",image:"/images/go os-Live News & Data Intelligence.jpg",desc:"GO OS يدمج الأخبار الماكروية والسوقية الفورية."},
-    {title:"تواصل متعدد اللغات",image:"/images/go os-Multilingual, Real-Time Communication.jpg",desc:"GO OS يتواصل بطلاقة عبر لغات متعددة."},
+    {title:"ذكاء تداول شخصي",image:"/images/go os-Personalized Trading Intelligence.jpg",desc:"كل تجربة مخصصة حسب أهدافك (دخل، استمرارية، نمو)، تحمّلك للمخاطر، والأسواق المفضلة. لا توجد لوحتا تحكم متماثلتان."},
+    {title:"إشارات مبنية على الذكاء",image:"/images/go os-Intelligence-Based Signals.jpg",desc:"تُولّد الإشارات من نماذج ذكاء حية وليس قواعد ثابتة. تدرك الاستراتيجية وظروف السوق وتشرح 'لماذا' توجد الإشارة وليس فقط 'ماذا تفعل'."},
+    {title:"محرك الاستراتيجيات",image:"/images/go os-Strategy Code Engine.jpg",desc:"منطق استراتيجي متقدم يعمل تحت الواجهة، يفك شفرة تحولات هيكل السوق، مناطق السيولة، ونفاذ الزخم ليفكر في أطر عمل وليس مؤشرات."},
+    {title:"تحليل الشارت بالصور",image:"/images/go os-Screenshot & Chart Analysis.jpg",desc:"يمكن للمستخدمين رفع أو تصوير الشارتات الحية. يقوم GO OS بتحليل الصورة وتحديد الهيكل والاتجاه، وكشف أخطاء التنفيذ المحتملة."},
+    {title:"تتبع الأداء الحي",image:"/images/go os-Real-Time Performance Tracking.jpg",desc:"يتتبع كل إشارة وتفاعل، ويقدم نسب الفوز/الخسارة ومقاييس أداء الاستراتيجية بدقة وشفافية."},
+    {title:"أخبار وبيانات فورية",image:"/images/go os-Live News & Data Intelligence.jpg",desc:"يدمج GO OS الأخبار الماكروية والسوقية الفورية، ويترجمها إلى سياق قابل للتنفيذ وليس مجرد عناوين. يفهم التأثير وليس المعلومات فقط."},
+    {title:"تواصل متعدد اللغات",image:"/images/go os-Multilingual, Real-Time Communication.jpg",desc:"يتواصل GO OS بطلاقة عبر لغات متعددة في الوقت الفعلي، مما يجعل المشاركة العالمية سلسة وشاملة وقابلة للتوسع."},
   ];
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle title="GO OS" sub="نظام التشغيل الذكي في قلب منظومة GO"/>
-      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO OS</strong> هو نظام التشغيل الذكي في قلب منظومة GO بالكامل<br/>يحوّل التعقيد إلى <strong style={{color:"#d4af37"}}>وضوح في الوقت الفعلي</strong></p></Card></FadeIn>
+      <FadeIn><Card gold style={{textAlign:"center",marginBottom:48,padding:"40px 24px"}}><p style={{fontSize:18,color:"rgba(255,255,255,0.8)",lineHeight:2,margin:0}}><strong style={{color:"#d4af37"}}>GO OS</strong> هو نظام التشغيل الذكي في قلب منظومة GO.<br/>يعمل كعقل يربط البيانات، الاستراتيجية، السلوك، والنتائج — محولاً التعقيد إلى <strong style={{color:"#d4af37"}}>وضوح في الوقت الفعلي</strong>.<br/>إنه يفهم السياق، يتكيف مع المستخدم، ويتطور مع كل تفاعل.</p></Card></FadeIn>
       <FadeIn delay={0.1}><Card style={{marginBottom:40,padding:"32px 28px"}}><h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",margin:"0 0 20px",fontFamily:"'Tajawal', sans-serif"}}>ماذا يفعل GO OS</h3><div style={{display:"flex",flexDirection:"column",gap:12}}>{whatItDoes.map((item,i)=>(<div key={i} style={{display:"flex",gap:10,alignItems:"flex-start"}}><span style={{color:"#d4af37",flexShrink:0,marginTop:2}}>✦</span><span style={{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.7}}>{item}</span></div>))}</div></Card></FadeIn>
       <FadeIn delay={0.2}><h3 style={{textAlign:"center",fontSize:24,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:28}}>⚡ المميزات الأساسية</h3></FadeIn>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:20}}>{features.map((f,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><Card style={{height:"100%"}}><CardImage src={f.image} height={160}/><h4 style={{fontSize:18,fontWeight:700,color:"#d4af37",margin:"0 0 8px",fontFamily:"'Tajawal', sans-serif"}}>{f.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0,lineHeight:1.8}}>{f.desc}</p></Card></FadeIn>))}</div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:20}}>{features.map((f,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><Card style={{height:"100%"}}><CardImage src={f.image} height={160}/><h4 style={{fontSize:18,fontWeight:700,color:"#d4af37",margin:"0 0 12px",fontFamily:"'Tajawal', sans-serif"}}>{f.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0,lineHeight:1.8,textAlign:"right"}}>{f.desc}</p></Card></FadeIn>))}</div>
       <FadeIn delay={0.5}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اشترك للوصول</Btn></div></FadeIn>
     </section>
   );
 }
 
-// === 3. GO Lap (تم التعديل: النص تحت الصورة دائماً، حذف الأيقونات) ===
+// === 3. GO Lap (تم دمج الشروحات العربية المطلوبة) ===
 function GoLap({setActive}){
   const strategies=[
-    {title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-strategies-maestro.avif"},
-    {title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-strategies-seeker.avif"},
-    {title:"SMC",desc:"تداول بمنطق المؤسسات",image:"/images/go lap-strategies-smc.avif"},
-    {title:"Strike 90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-strategies-strike90.avif"},
-    {title:"Technical Analysis",desc:"وضوح تقني في حركة السوق",image:"/images/go lap-strategies-technical analysis.avif"},
+    {title:"Maestro",desc:"استراتيجية عالية المستوى تركز على هيكل السوق، السيولة، وتدفق المؤسسات. صممت للمتداولين الذين يريدون فهمًا كاملاً للسوق من الأعلى للأسفل، لرؤية ما يفوته الآخرون.",image:"/images/go lap-strategies-maestro.avif"},
+    {title:"Seeker",desc:"استراتيجية دقيقة مصممة لتحديد أفضل إعدادات التداول بالصبر والوضوح والتنفيذ المنضبط. اعثر على الفرصة.",image:"/images/go lap-strategies-seeker.avif"},
+    {title:"SMC",desc:"مفاهيم الأموال الذكية (SMC) تحلل كيف تقود المؤسسات السعر من خلال السيولة، عدم التوازن، وهيكل السوق. يركز هذا النهج على الدقة والصبر والتداول بانسجام مع سلوك المؤسسات بدلاً من مؤشرات التجزئة.",image:"/images/go lap-strategies-smc.avif"},
+    {title:"Strike 90",desc:"Strike90 هي استراتيجية تنفيذ تعتمد على الوقت، مصممة للاستفادة من النافذة الأكثر سيولة وتقلبًا في جلسة نيويورك. أول 90 دقيقة بعد افتتاح السوق.",image:"/images/go lap-strategies-strike90.avif"},
+    {title:"Technical Analysis",desc:"التحليل الفني هو نهج منظم لدراسة سلوك السعر باستخدام أنماط الرسم البياني، الاتجاهات، الدعم والمقاومة، والزخم. يساعد المتداولين على تحديد اتجاه السوق، نقاط الدخول، ومستويات المخاطرة بناءً على بيانات السعر التاريخية.",image:"/images/go lap-strategies-technical analysis.avif"},
   ];
 
   const indicators=[
-    {title:"Defender",desc:"احمِ ما تكسبه",image:"/images/go lap-indicators-defender.avif"},
-    {title:"Hunter",desc:"اضرب بنيّة",image:"/images/go lap-indicators-hunter.avif"},
-    {title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-indicators-maestro.avif"},
-    {title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-indicators-seeker.avif"},
-    {title:"Strike90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-indicators-strike90.avif"},
+    {title:"Defender",desc:"صمم Defender للمساعدة في حماية رأس مالك من خلال الوعي المنضبط بالمخاطر. يدعم اتخاذ قرارات بطيئة ودقيقة لمساعدة المتداولين على البقاء محميين خلال ظروف السوق المتقلبة. احمِ ما تكسبه.",image:"/images/go lap-indicators-defender.avif"},
+    {title:"Hunter",desc:"صمم Hunter للمتداولين الحاسمين الذين يبحثون عن فرص المضاربة المدفوعة بالزخم. يساعد في تحديد حركات السوق عالية الطاقة والتنفيذ بسرعة وثقة وهيكلية. اضرب بنية.",image:"/images/go lap-indicators-hunter.avif"},
+    {title:"Maestro",desc:"يقدم Maestro رؤى متقدمة للسوق من خلال تسليط الضوء على الهيكل، الزخم، ومناطق الاهتمام الرئيسية. مصمم لمساعدتك على إدراك ما يغفل عنه الآخرون والحفاظ على السيطرة بثقة.",image:"/images/go lap-indicators-maestro.avif"},
+    {title:"Seeker",desc:"يقوم Seeker بمسح السوق للمساعدة في تحديد إعدادات تداول عالية الاحتمالية لمناطق القنص. مبني للصبر والدقة، ويدعم المتداولين الذين يتحركون بذكاء وثبات وحساب.",image:"/images/go lap-indicators-seeker.avif"},
+    {title:"Strike 90",desc:"مؤشر مخصص لاستراتيجية Strike 90 لتحديد الفرص الزمنية الدقيقة.",image:"/images/go lap-indicators-strike90.avif"},
   ];
 
   return(
@@ -141,16 +146,16 @@ function GoLap({setActive}){
         <h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8,marginTop:32}}>⚔️ الاستراتيجيات</h3>
         <p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>استراتيجيات التداول المتقدمة</p>
       </FadeIn>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16,marginBottom:48}}>
-        {strategies.map((s,i)=>(<FadeIn key={i} delay={0.15+i*0.06}><Card><CardImage src={s.image} height={140}/><div style={{textAlign:"right"}}><h4 style={{fontSize:18,fontWeight:700,color:"#d4af37",margin:"0 0 4px",fontFamily:"'Tajawal', sans-serif"}}>{s.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0}}>{s.desc}</p></div></Card></FadeIn>))}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:20,marginBottom:48}}>
+        {strategies.map((s,i)=>(<FadeIn key={i} delay={0.15+i*0.06}><Card style={{height:"100%"}}><CardImage src={s.image} height={160}/><div style={{textAlign:"right"}}><h4 style={{fontSize:18,fontWeight:700,color:"#d4af37",margin:"0 0 10px",fontFamily:"'Tajawal', sans-serif"}}>{s.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0,lineHeight:1.7}}>{s.desc}</p></div></Card></FadeIn>))}
       </div>
 
       <FadeIn delay={0.2}>
         <h3 style={{textAlign:"center",fontSize:26,color:"#d4af37",fontWeight:800,fontFamily:"'Tajawal', sans-serif",marginBottom:8}}>📡 المؤشرات</h3>
         <p style={{textAlign:"center",fontSize:14,color:"rgba(255,255,255,0.5)",marginBottom:28}}>المؤشرات الذكية</p>
       </FadeIn>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:16}}>
-        {indicators.map((ind,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><Card><CardImage src={ind.image} height={140}/><div style={{textAlign:"right"}}><h4 style={{fontSize:18,fontWeight:700,color:"#a78bfa",margin:"0 0 4px",fontFamily:"'Tajawal', sans-serif"}}>{ind.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0}}>{ind.desc}</p></div></Card></FadeIn>))}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))",gap:20}}>
+        {indicators.map((ind,i)=>(<FadeIn key={i} delay={0.25+i*0.06}><Card style={{height:"100%"}}><CardImage src={ind.image} height={160}/><div style={{textAlign:"right"}}><h4 style={{fontSize:18,fontWeight:700,color:"#a78bfa",margin:"0 0 10px",fontFamily:"'Tajawal', sans-serif"}}>{ind.title}</h4><p style={{fontSize:14,color:"rgba(255,255,255,0.7)",margin:0,lineHeight:1.7}}>{ind.desc}</p></div></Card></FadeIn>))}
       </div>
       
       <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اشترك للوصول</Btn></div></FadeIn>
@@ -158,17 +163,17 @@ function GoLap({setActive}){
   );
 }
 
-// === 4. GO Library ===
+// === 4. GO Library (تم تحديث الوصف حسب النص) ===
 function GoLibrary({setActive}){
   const levels=[
-    {title:"أساسيات السوق",titleEn:"Market Foundation",desc:"تعلّم كيف يعمل سوق الفوركس فعلاً.",image:"/images/go library-market foundation.avif",items:["ما هو التداول؟","مقدمة سريعة عن عالم التداول وكيف تبدأ رحلتك"]},
-    {title:"الأساسيات التطبيقية",titleEn:"Applied Foundation",desc:"خذ المفاهيم الأساسية وطبّقها في ظروف السوق الحقيقية.",image:"/images/go library-applied foundation-forex basics.avif",items:["أساسيات الفوركس — تعلّم أساسيات تداول الفوركس","أساسيات الأسهم — تعلّم أساسيات الأسهم","أساسيات الكريبتو — تعلّم أساسيات العملات الرقمية"]},
-    {title:"الأساسيات المتقدمة",titleEn:"Advanced Foundation",desc:"أتقن هيكل السوق المتقدم والسيولة والتنفيذ الدقيق.",image:"/images/go library-advanced foundation-market structure.avif",items:["هيكل السوق — تعلّم أساسيات هيكل السوق وتحليله"]},
+    {title:"Market Foundation",titleAr:"أساسيات السوق",desc:"تعلم كيف يعمل سوق الفوركس فعليًا من حسابات حركة السعر والجلسات إلى كيفية تأثير المؤسسات على الرسوم البيانية. يبني هذا الأساس الفهم والثقة المطلوبة قبل وضع صفقتك الأولى.",image:"/images/go library-market foundation.avif",items:["ما هو التداول؟","مقدمة سريعة عن عالم التداول وكيف تبدأ رحلتك"]},
+    {title:"Applied Foundation",titleAr:"الأساسيات التطبيقية",desc:"خذ المفاهيم الأساسية وطبقها في ظروف السوق الحقيقية. تعلم قراءة الشارت، تحديد الاتجاه، إدارة المخاطر، وتنفيذ الصفقات المنظم للانتقال من النظرية إلى التطبيق.",image:"/images/go library-applied foundation-forex basics.avif",items:["أساسيات الفوركس — تعلّم أساسيات تداول الفوركس","أساسيات الأسهم — تعلّم أساسيات الأسهم","أساسيات الكريبتو — تعلّم أساسيات العملات الرقمية"]},
+    {title:"Advanced Foundation",titleAr:"الأساسيات المتقدمة",desc:"أتقن هيكل السوق المتقدم، السيولة، والتنفيذ الدقيق. يركز هذا المستوى على الاستمرارية، علم النفس، وتحسين الاستراتيجية للمتداولين المستعدين للعمل بثقة وسيطرة.",image:"/images/go library-advanced foundation-market structure.avif",items:["هيكل السوق — تعلّم أساسيات هيكل السوق وتحليله"]},
   ];
   return(
     <section style={{padding:"80px 24px",maxWidth:1200,margin:"0 auto"}}>
       <SectionTitle title="GO Library" sub="مكتبة معرفية رقمية شاملة لرفع مستوى الوعي والمعرفة"/>
-      <div style={{display:"flex",flexDirection:"column",gap:24}}>{levels.map((lvl,i)=>(<FadeIn key={i} delay={i*0.1}><Card style={{padding:"32px 28px"}}><CardImage src={lvl.image} height={180}/><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}><h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",margin:0,fontFamily:"'Tajawal', sans-serif"}}>{lvl.title}</h3><Badge>{lvl.titleEn}</Badge></div><p style={{fontSize:15,color:"rgba(255,255,255,0.75)",lineHeight:1.8,margin:"0 0 16px"}}>{lvl.desc}</p>{lvl.items.map((item,j)=>(<div key={j} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8}}><span style={{color:"#d4af37",flexShrink:0,fontSize:12,marginTop:3}}>◆</span><span style={{fontSize:14,color:"rgba(255,255,255,0.65)",lineHeight:1.7}}>{item}</span></div>))}</Card></FadeIn>))}</div>
+      <div style={{display:"flex",flexDirection:"column",gap:24}}>{levels.map((lvl,i)=>(<FadeIn key={i} delay={i*0.1}><Card style={{padding:"32px 28px"}}><CardImage src={lvl.image} height={200}/><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}><h3 style={{fontSize:22,fontWeight:800,color:"#d4af37",margin:0,fontFamily:"'Tajawal', sans-serif"}}>{lvl.titleAr}</h3><Badge>{lvl.title}</Badge></div><p style={{fontSize:16,color:"rgba(255,255,255,0.8)",lineHeight:1.9,margin:"0 0 20px"}}>{lvl.desc}</p>{lvl.items.map((item,j)=>(<div key={j} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8}}><span style={{color:"#d4af37",flexShrink:0,fontSize:12,marginTop:3}}>◆</span><span style={{fontSize:14,color:"rgba(255,255,255,0.65)",lineHeight:1.7}}>{item}</span></div>))}</Card></FadeIn>))}</div>
       <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("packages")}>📦 اشترك للوصول</Btn></div></FadeIn>
     </section>
   );
