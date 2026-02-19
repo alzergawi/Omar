@@ -81,7 +81,7 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
       boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
     }}>
       <iframe 
-        src="https://www.youtube.com/embed/VIDEO_ID_HERE" 
+        src="https://youtu.be/0WQrnPqGctQ?si=8sGeagl0B-XWJAEy" 
         style={{
           position: "absolute",
           top: 0,
@@ -269,5 +269,6 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
