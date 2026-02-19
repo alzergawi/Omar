@@ -147,7 +147,6 @@ function GoIntel({setActive}){
       <MarketGroup title="💱 Forex" color="#60a5fa" items={forexMarkets}/>
       <MarketGroup title="📈 Stocks" color="#c084fc" items={stockMarkets}/>
       <MarketGroup title="🪙 Crypto" color="#fbbf24" items={cryptoMarkets}/>
-      <FadeIn delay={0.4}><div style={{textAlign:"center",marginTop:40}}><Btn primary onClick={()=>setActive("golap")}>💻 انتقل إلى GO Lap</Btn></div></FadeIn>
     </section>
   );
 }
