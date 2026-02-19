@@ -58,26 +58,26 @@ function Hero({setActive}){
       {/* Circular Profile */}
       <FadeIn><div style={{width:180,height:180,borderRadius:"50%",overflow:"hidden",border:"4px solid rgba(212,175,55,0.6)",boxShadow:"0 0 60px rgba(212,175,55,0.2), 0 0 120px rgba(212,175,55,0.08)",margin:"0 auto 32px",background:"linear-gradient(135deg, rgba(212,175,55,0.2), rgba(10,10,10,0.9))",position:"relative"}}><img src="/images/coach-profile.webp" alt="كوتش عمر رباح الباشا" style={{width:"110%",height:"110%",objectFit:"cover",display:"block",position:"absolute",top:"-5%",left:"-5%"}} onError={(e)=>{e.target.style.display="none";}}/><div style={{position:"absolute",inset:-4,borderRadius:"50%",border:"2px solid transparent",borderTopColor:"#d4af37",borderBottomColor:"#d4af37",animation:"spinRing 8s linear infinite",pointerEvents:"none"}}/></div></FadeIn>
 
-      <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1}}>
+      <div style={{textAlign:"center",maxWidth:800,width:"100%",position:"relative",zIndex:1}}>
         <FadeIn delay={0.05}><Badge>🇫🇷 رائد أعمال في فرنسا</Badge></FadeIn>
         <FadeIn delay={0.15}><h1 style={{fontSize:"clamp(36px, 7vw, 64px)",fontWeight:900,lineHeight:1.15,margin:"24px 0 0",fontFamily:"'Tajawal', sans-serif",background:"linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundSize:"200% 200%",animation:"shimmer 4s ease infinite"}}>كوتش عمر رباح الباشا</h1></FadeIn>
         <FadeIn delay={0.25}><p style={{fontSize:22,color:"#d4af37",margin:"16px 0 0",fontWeight:700,fontFamily:"'Tajawal', sans-serif",letterSpacing:1}}>✦ الباشا معكم.. فلا خوف عليكم ✦</p></FadeIn>
         <FadeIn delay={0.35}><p style={{fontSize:18,color:"rgba(255,255,255,0.65)",margin:"20px auto 0",maxWidth:550,lineHeight:1.8}}>مؤسس نظام <strong style={{color:"#d4af37"}}>SB Model</strong> ومشروع <strong style={{color:"#d4af37"}}>X</strong><br/>مستشار وخبير في أسواق المال<br/>تداول • استثمار • ذكاء اصطناعي • دخل سلبي</p></FadeIn>
         
         <FadeIn delay={0.4}>
-          <div style={{maxWidth:600, margin:"32px auto 0", width:"100%"}}>
+          <div style={{width:"100%", maxWidth:600, margin:"32px auto 0", padding:"0 10px"}}>
             <p style={{fontSize:15, color:"#d4af37", fontWeight:700, marginBottom:12, fontFamily:"'Tajawal', sans-serif"}}>
               🎬 تعرّف على الكوتش عمر الباشا
             </p>
             
-            {/* الكود المعدل ليعمل على جميع أجهزة أندرويد */}
+            {/* حاوية الفيديو المرنة */}
             <div style={{
               position: "relative",
               width: "100%",
-              paddingTop: "56.25%", /* نسبة 16:9 ثابتة ومضمونة */
+              paddingTop: "56.25%", 
               height: 0,
-              overflow: "hidden",
               borderRadius: 16,
+              overflow: "hidden",
               border: "1px solid rgba(212,175,55,0.2)",
               background: "#000",
               boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
