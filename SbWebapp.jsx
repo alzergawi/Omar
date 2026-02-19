@@ -56,7 +56,7 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
   <FadeIn style={{width:"100%",maxWidth:900,marginBottom:40}}><div style={{borderRadius:24,overflow:"hidden",border:"1px solid rgba(212,175,55,0.3)",boxShadow:"0 20px 80px rgba(212,175,55,0.1)"}}><img src="/images/hero-banner.jpg" alt="الباشا" style={{width:"100%",display:"block"}} onError={(e)=>{e.target.parentElement.parentElement.style.display="none";}}/></div></FadeIn>
 
   {/* Circular Profile */}
-  style={{width:"110%",height:"110%",objectFit:"cover",display:"block",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%, -50%)"}}
+  style={{width:"120%",height:"120%",objectFit:"cover",display:"block",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%, -50%)"}}
 
   <div style={{textAlign:"center",maxWidth:800,position:"relative",zIndex:1}}>
     <FadeIn delay={0.05}><Badge>🇫🇷 رائد أعمال في فرنسا</Badge></FadeIn>
@@ -315,6 +315,7 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
