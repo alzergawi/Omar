@@ -33,12 +33,11 @@ function CardImage({src,height=160,radius=14}){return(<div style={{width:"100%",
 
 function DetailCard({icon,title,desc,items,color="#d4af37",image}){const[open,setOpen]=useState(false);return(<Card onClick={()=>setOpen(!open)} style={{cursor:"pointer"}}>{image&&open&&<CardImage src={image} height={140}/>}<div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}><div style={{display:"flex",gap:12,alignItems:"center"}}>{icon&&<span style={{fontSize:28}}>{icon}</span>}<div><h4 style={{fontSize:17,fontWeight:700,color,margin:0,fontFamily:"'Tajawal', sans-serif"}}>{title}</h4>{desc&&<p style={{fontSize:13,color:"rgba(255,255,255,0.5)",margin:"4px 0 0"}}>{desc}</p>}</div></div><span style={{color,fontSize:20,transition:"transform 0.3s",transform:open?"rotate(45deg)":"rotate(0)",flexShrink:0}}>+</span></div>{open&&items&&(<div style={{marginTop:16,paddingTop:12,borderTop:"1px solid rgba(255,255,255,0.08)"}}>{items.map((item,i)=>(<div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8}}><span style={{color,flexShrink:0,fontSize:12,marginTop:3}}>◆</span><span style={{fontSize:14,color:"rgba(255,255,255,0.75)",lineHeight:1.7}}>{item}</span></div>))}</div>)}</Card>);}
 
-// === النافبار (تم تحديث الأقسام) ===
+// === النافبار ===
 function Nav({active,setActive}){
   const[open,setOpen]=useState(false);
   const[scrolled,setScrolled]=useState(false);
   useEffect(()=>{const fn=()=>setScrolled(window.scrollY>50);window.addEventListener("scroll",fn);return()=>window.removeEventListener("scroll",fn);},[]);
-  // تمت إضافة golap هنا
   const items=[{id:"home",label:"الرئيسية"},{id:"gointel",label:"GO Intel"},{id:"goos",label:"GO OS"},{id:"golap",label:"GO Lap"},{id:"golibrary",label:"GO Library"},{id:"packages",label:"الباقات"},{id:"success",label:"قصص النجاح"},{id:"contact",label:"تواصل"}];
   return(<nav style={{position:"fixed",top:0,left:0,right:0,zIndex:1000,background:scrolled?"rgba(10,10,10,0.95)":"rgba(10,10,10,0.7)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.06)",transition:"all 0.3s ease"}}><div style={{maxWidth:1200,margin:"0 auto",padding:"0 24px",display:"flex",alignItems:"center",justifyContent:"space-between",height:64}}><div style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}} onClick={()=>{setActive("home");window.scrollTo({top:0,behavior:"smooth"});}}><span style={{fontSize:28}}>👑</span><span style={{fontSize:20,fontWeight:800,color:"#d4af37",fontFamily:"'Tajawal', sans-serif"}}>الباشا</span></div><div style={{display:"flex",gap:8,alignItems:"center"}} className="nav-desktop">{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"8px 16px",borderRadius:10,cursor:"pointer",fontSize:14,fontWeight:600,fontFamily:"'Tajawal', sans-serif",transition:"all 0.3s ease"}}>{it.label}</button>))}</div><button className="nav-mobile-toggle" onClick={()=>setOpen(!open)} style={{background:"none",border:"none",color:"#d4af37",fontSize:24,cursor:"pointer",display:"none"}}>{open?"✕":"☰"}</button></div>{open&&(<div className="nav-mobile-menu" style={{padding:"8px 24px 20px",display:"flex",flexDirection:"column",gap:4,borderTop:"1px solid rgba(255,255,255,0.06)"}}>{items.map(it=>(<button key={it.id} onClick={()=>{setActive(it.id);setOpen(false);}} style={{background:active===it.id?"rgba(212,175,55,0.15)":"transparent",color:active===it.id?"#d4af37":"rgba(255,255,255,0.7)",border:"none",padding:"12px 16px",borderRadius:10,cursor:"pointer",fontSize:15,fontWeight:600,fontFamily:"'Tajawal', sans-serif",textAlign:"right",transition:"all 0.3s ease"}}>{it.label}</button>))}</div>)}</nav>);
 }
@@ -118,21 +117,21 @@ function GoOS({setActive}){
 
 // === 3. GO Lap (القسم الجديد المستقل) ===
 function GoLap({setActive}){
-  // === هنا الصور التي أرسلتها بصيغة avif والمسافات ===
+  // === تم تحديث النصوص هنا لتكون داخل البطاقات فقط ===
   const strategies=[
-    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-strategies-maestro.avif",items:["استراتيجية متقدمة تركّز على هيكل السوق والسيولة","تحليل كامل للسوق بنظرة واحدة"]},
-    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-strategies-seeker.avif",items:["استراتيجية دقيقة مصممة لتحديد أفضل نقاط الدخول","حركة ذكية ومحسوبة وثابتة"]},
-    {icon:"🏛️",title:"SMC",desc:"تداول بمنطق المؤسسات",image:"/images/go lap-strategies-smc.avif",items:["تحليل كيف تحرّك المؤسسات السعر","بديل عن المؤشرات التقليدية للتجزئة"]},
-    {icon:"⚡",title:"Strike 90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-strategies-strike90.avif",items:["استراتيجية تنفيذ مبنية على الوقت","أول 90 دقيقة بعد افتتاح السوق"]},
-    {icon:"📊",title:"Technical Analysis",desc:"وضوح تقني في حركة السوق",image:"/images/go lap-strategies-technical analysis.avif",items:["نهج منظم لدراسة سلوك السعر","الدعم والمقاومة والزخم"]},
+    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-strategies-maestro.avif",items:[]},
+    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-strategies-seeker.avif",items:[]},
+    {icon:"🏛️",title:"SMC",desc:"تداول بمنطق المؤسسات",image:"/images/go lap-strategies-smc.avif",items:[]},
+    {icon:"⚡",title:"Strike 90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-strategies-strike90.avif",items:[]},
+    {icon:"📊",title:"Technical Analysis",desc:"وضوح تقني في حركة السوق",image:"/images/go lap-strategies-technical analysis.avif",items:[]},
   ];
 
   const indicators=[
-    {icon:"🛡️",title:"Defender",desc:"احمِ ما تكسبه",image:"/images/go lap-indicators-defender.avif",items:["مصمم لحماية رأس مالك من خلال وعي منضبط بالمخاطر"]},
-    {icon:"🏹",title:"Hunter",desc:"اضرب بنيّة",image:"/images/go lap-indicators-hunter.avif",items:["مبني للمتداولين الحاسمين","فرص سكالبينج مبنية على الزخم"]},
-    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-indicators-maestro.avif",items:["يقدم رؤى سوقية متقدمة عبر إبراز الهيكل والزخم"]},
-    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-indicators-seeker.avif",items:["يمسح السوق لتحديد نقاط دخول عالية الاحتمالية"]},
-    {icon:"⚡",title:"Strike90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-indicators-strike90.avif",items:["منطقة ضربة عالية الاحتمالية","نظام ثقة مبني على البيانات"]},
+    {icon:"🛡️",title:"Defender",desc:"احمِ ما تكسبه",image:"/images/go lap-indicators-defender.avif",items:[]},
+    {icon:"🏹",title:"Hunter",desc:"اضرب بنيّة",image:"/images/go lap-indicators-hunter.avif",items:[]},
+    {icon:"🎯",title:"Maestro",desc:"شاهد ما لا يراه الآخرون",image:"/images/go lap-indicators-maestro.avif",items:[]},
+    {icon:"🔍",title:"Seeker",desc:"اعثر على الفرصة",image:"/images/go lap-indicators-seeker.avif",items:[]},
+    {icon:"⚡",title:"Strike90",desc:"90 دقيقة.. حركة واحدة دقيقة",image:"/images/go lap-indicators-strike90.avif",items:[]},
   ];
 
   return(
