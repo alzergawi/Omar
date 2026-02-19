@@ -70,16 +70,29 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
     </p>
     
     {/* بداية كود اليوتيوب */}
-    <div style={{
+        <div style={{
       position: "relative",
-      paddingBottom: "56.25%", /* نسبة عرض إلى ارتفاع 16:9 */
-      height: 0,
-      overflow: "hidden",
+      width: "100%",             // تأكيد العرض الكامل
+      aspectRatio: "16/9",       // النسبة القياسية لليوتيوب (الحل الجذري)
       borderRadius: 16,
-      border: "1px solid rgba(212,175,55,0.2)", /* الإطار الذهبي */
+      overflow: "hidden",
+      border: "1px solid rgba(212,175,55,0.2)",
       background: "#000",
       boxShadow: "0 10px 30px rgba(0,0,0,0.5)"
     }}>
+      <iframe 
+        src="https://www.youtube.com/embed/0WQrnPqGctQ" 
+        style={{
+          width: "100%",
+          height: "100%",
+          border: 0,
+          display: "block" // لمنع ظهور هوامش سفلية غريبة
+        }}
+        title="YouTube Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowFullScreen
+      />
+    </div>
       <iframe 
   src="https://www.youtube.com/embed/0WQrnPqGctQ" 
   style={{
@@ -269,6 +282,7 @@ export default function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
 
 
