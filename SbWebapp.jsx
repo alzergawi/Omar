@@ -49,7 +49,34 @@ function Hero({setActive}){return(<section style={{minHeight:"100vh",display:"fl
     <FadeIn delay={0.15}><h1 style={{fontSize:"clamp(36px, 7vw, 64px)",fontWeight:900,lineHeight:1.15,margin:"24px 0 0",fontFamily:"'Tajawal', sans-serif",background:"linear-gradient(135deg, #fff 0%, #d4af37 50%, #fff 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundSize:"200% 200%",animation:"shimmer 4s ease infinite"}}>كوتش عمر رباح الباشا</h1></FadeIn>
     <FadeIn delay={0.25}><p style={{fontSize:22,color:"#d4af37",margin:"16px 0 0",fontWeight:700,fontFamily:"'Tajawal', sans-serif",letterSpacing:1}}>✦ الباشا معكم.. فلا خوف عليكم ✦</p></FadeIn>
     <FadeIn delay={0.35}><p style={{fontSize:18,color:"rgba(255,255,255,0.65)",margin:"20px auto 0",maxWidth:550,lineHeight:1.8}}>مؤسس نظام <strong style={{color:"#d4af37"}}>SB Model</strong> ومشروع <strong style={{color:"#d4af37"}}>X</strong><br/>مستشار وخبير في أسواق المال<br/>تداول • استثمار • ذكاء اصطناعي • دخل سلبي</p></FadeIn>
-    <FadeIn delay={0.4}><div style={{width:"100%",maxWidth:600,margin:"32px auto 0",padding:"0 0"}}><p style={{fontSize:15,color:"#d4af37",fontWeight:700,marginBottom:12,fontFamily:"'Tajawal', sans-serif",textAlign:"center"}}>🎬 تعرّف على الكوتش عمر الباشا</p><div style={{position:"relative",width:"100%",paddingBottom:"56.25%",height:0,overflow:"hidden",borderRadius:16,border:"1px solid rgba(212,175,55,0.2)",background:"#000",boxShadow:"0 10px 30px rgba(0,0,0,0.5)"}}><iframe src="https://www.youtube.com/embed/0WQrnPqGctQ" style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",border:0}} title="YouTube Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></div></div></FadeIn>
+    <FadeIn delay={0.4}><div style={{width:"100%",maxWidth:600,margin:"32px auto 0",padding:"0 0"}}><p style={{fontSize:15,color:"#d4af37",fontWeight:700,marginBottom:12,fontFamily:"'Tajawal', sans-serif",textAlign:"center"}}>🎬 تعرّف على الكوتش عمر الباشا</p><div style={{
+      position:"relative",
+      width:"100%",
+      paddingBottom:"56.25%",
+      height:0,
+      overflow:"hidden",
+      borderRadius:16,
+      border:"1px solid rgba(212,175,55,0.2)",
+      background:"#000",
+      boxShadow:"0 10px 30px rgba(0,0,0,0.5)"
+    }}>
+      <iframe
+        src="https://www.youtube.com/embed/0WQrnPqGctQ"
+        style={{
+          position:"absolute",
+          top:0,
+          left:0,
+          width:"100%",
+          height:"100%",
+          border:0
+        }}
+        title="YouTube Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+    </div>
+    </FadeIn>
     <FadeIn delay={0.5}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(140px, 1fr))",gap:16,margin:"40px auto",maxWidth:650}}><Stat icon="🏆" value="+2,779" label="متدرب"/><Stat icon="📅" value="+9" label="سنوات خبرة"/><Stat icon="🌍" value="+15" label="دولة عربية"/><Stat icon="⭐" value="SB" label="Model"/></div></FadeIn>
     <FadeIn delay={0.6}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:16}}><Btn primary onClick={()=>setActive("packages")}>📦 ابدأ الآن</Btn><Btn outline onClick={()=>setActive("gointel")}>🚀 استكشف GO Intel</Btn></div></FadeIn>
   </div>
@@ -302,3 +329,4 @@ function App(){
 
 // === الربط النهائي لتعمل الصفحة ===
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
