@@ -406,7 +406,7 @@ function App(){
         @media(min-width:769px){.nav-mobile-menu{display:none !important;}}
 
         /* ✅ الإصلاح الجذري: منع أي عنصر من تجاوز الشاشة */
-        iframe, video, img { max-width: 100% !important; box-sizing: border-box !important; }
+        iframe, video, img { max-width: 110% !important; box-sizing: border-box !important; }
         section { overflow: hidden; width: 100%; box-sizing: border-box; }
         div { max-width: 100%; }
       `}</style>
@@ -417,4 +417,5 @@ function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
 
